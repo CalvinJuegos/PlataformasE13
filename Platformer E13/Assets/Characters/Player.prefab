@@ -10,12 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7892509619212958820}
   - component: {fileID: 8525416417083718252}
-  - component: {fileID: 2145783461159681264}
-  - component: {fileID: 1375899371064588453}
-  - component: {fileID: 957355289713617909}
-  - component: {fileID: 2097409207621882969}
+  - component: {fileID: 2767323524997230359}
+  - component: {fileID: 2268247240478343245}
   - component: {fileID: 1499380236807288846}
-  - component: {fileID: 6343955884744071239}
+  - component: {fileID: 2084105605191910638}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -90,15 +88,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2145783461159681264
-BoxCollider2D:
+--- !u!50 &2767323524997230359
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2159651313294376806}
-  m_Enabled: 1
-  m_Density: 1
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,36 +111,11 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.005152181, y: -0.028835967}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3027486, y: 0.59629667}
-  m_EdgeRadius: 0
---- !u!114 &1375899371064588453
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &2268247240478343245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,50 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2159651313294376806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ae0c3d7722a4bc0b743f08432e661a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 512
-  horizontalRayCount: 4
-  verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  collider: {fileID: 0}
-  maxSlopeAngle: 55
-  playerInput: {x: 0, y: 0}
---- !u!114 &957355289713617909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2159651313294376806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d4b25ed59774c2dab59a88f8ad8428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJumpHeight: 4
-  minJumpHeight: 1
-  timeToJumpApex: 0.4
-  wallJumpClimb: {x: 7.5, y: 16}
-  wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 18, y: 17}
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
-  tr: {fileID: 1499380236807288846}
---- !u!114 &2097409207621882969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2159651313294376806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81de9558679394d24b9a80bed2b095c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dfac6eb7ab95bb46b0174a1d75cd763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!96 &1499380236807288846
@@ -303,24 +240,33 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
---- !u!95 &6343955884744071239
-Animator:
-  serializedVersion: 5
+--- !u!114 &2084105605191910638
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2159651313294376806}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c5a58ec37ee5cd046ad36d9a5ba7e453, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: 0}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
