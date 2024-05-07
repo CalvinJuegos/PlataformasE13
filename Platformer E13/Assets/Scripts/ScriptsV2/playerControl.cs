@@ -22,6 +22,7 @@ public class playerControl : MonoBehaviour
 
     Vector2 moveInput;
 
+    [SerializeField]
     private bool _isMoving = false;
 
     public bool IsMoving { get 
@@ -32,6 +33,16 @@ public class playerControl : MonoBehaviour
             animator.SetBool("IsMoving", _isMoving);
         }
     }
+
+    public bool _isFacingRight = true;
+    public bool isFacingRight { get{ return _isFacingRight; } private set{ 
+        if (_isFacingRight != value)
+            {
+                // Dar la vuelta a la escala local
+                transform.localScale *= new Vector2(-1, 1);
+            }
+            _isFacingRight = value;
+        }}
 
     Rigidbody2D rb;
     Animator animator;
@@ -64,5 +75,23 @@ public class playerControl : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         IsMoving = moveInput != Vector2.zero;
+
+        SetDirection(moveInput);
     }
+
+    private void SetDirection(Vector2 moveInput)
+    {
+        if (moveInput.x > 0 && !isFacingRight)
+        {
+            //Mirar a la derecha
+            isFacingRight = true;
+
+        }
+        else if (moveInput.x < 0 && isFacingRight)
+        {
+            //Mirar a la izquierda
+            isFacingRight = false;
+        }
+    }
+
 }
