@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4038433590564401751}
   - component: {fileID: 1207160683505469822}
   - component: {fileID: 4170387456268863150}
+  - component: {fileID: 1449309654450130249}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -133,6 +134,8 @@ MonoBehaviour:
   timeToJumpApex: 0.4
   dashingTime: 0.2
   dashingCooldown: 1
+  _isMoving: 0
+  _isFacingRight: 1
 --- !u!114 &1207160683505469822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,3 +252,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &1449309654450130249
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182294109459327245}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.078695536, y: -0.2585714}
+  m_Size: {x: 1.0545373, y: 3.5278268}
+  m_Direction: 0

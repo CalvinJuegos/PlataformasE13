@@ -30,7 +30,7 @@ public class playerControl : MonoBehaviour
             return _isMoving;
         } private set {
             _isMoving = value;
-            animator.SetBool("IsMoving", _isMoving);
+            animator.SetBool(animatorStrings.isMoving, _isMoving);
         }
     }
 
