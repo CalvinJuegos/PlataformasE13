@@ -131,6 +131,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1819389463}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: playerControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2795528936413606984, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2156,6 +2186,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 326189717}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1819389463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+    type: 3}
+  m_PrefabInstance: {fileID: 326189717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfac6eb7ab95bb46b0174a1d75cd763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2124002059
 GameObject:
   m_ObjectHideFlags: 0

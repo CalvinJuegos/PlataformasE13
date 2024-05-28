@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(touchingDirections))] 
+
 
 public class playerControl : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float jumpImpulse = 10f;
+
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
@@ -19,6 +22,8 @@ public class playerControl : MonoBehaviour
     private float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCooldown = 1f;
+
+    touchingDirections touching_directions;
 
     Vector2 moveInput;
 
@@ -51,12 +56,13 @@ public class playerControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touching_directions = GetComponent<touchingDirections>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+            
     }
 
     // Update is called once per frame
@@ -68,6 +74,8 @@ public class playerControl : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+
+        animator.SetFloat(animatorStrings.yvelocity, rb.velocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -77,6 +85,16 @@ public class playerControl : MonoBehaviour
         IsMoving = moveInput != Vector2.zero;
 
         SetDirection(moveInput);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        // Check if alive when hp implemented
+        if (context.started && touching_directions.IsGrounded)
+        {
+            animator.SetTrigger(animatorStrings.jump);
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
     }
 
     private void SetDirection(Vector2 moveInput)
