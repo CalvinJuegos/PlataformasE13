@@ -9,4 +9,6 @@ internal class animatorStrings
     internal static string isGrounded = "isGrounded";
     internal static string yvelocity = "yvelocity";
     internal static string jump = "jump";
+    internal static string attack = "attack";
+    internal static string canMove = "canMove";
 }

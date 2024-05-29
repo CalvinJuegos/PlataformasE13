@@ -133,9 +133,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1819389463}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -143,8 +158,18 @@ PrefabInstance:
       objectReference: {fileID: 1819389463}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAttack
       objectReference: {fileID: 0}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
@@ -153,8 +178,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: playerControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: playerControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
@@ -1914,7 +1949,7 @@ Transform:
   m_GameObject: {fileID: 1191046839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.134125, y: -4.7225814, z: -177.12114}
+  m_LocalPosition: {x: -31.134125, y: -4.8, z: -177.12114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2321,7 +2356,7 @@ Transform:
   m_GameObject: {fileID: 2127067756}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.625814, y: -4.7225814, z: -177.12114}
+  m_LocalPosition: {x: 19.625814, y: -4.8, z: -177.12114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

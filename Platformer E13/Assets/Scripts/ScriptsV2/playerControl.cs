@@ -49,6 +49,11 @@ public class playerControl : MonoBehaviour
             _isFacingRight = value;
         }}
 
+    public bool CanMove { get 
+        {
+            return animator.GetBool(animatorStrings.canMove);
+        } }
+
     Rigidbody2D rb;
     Animator animator;
 
@@ -73,9 +78,8 @@ public class playerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        MovementStart();
 
-        animator.SetFloat(animatorStrings.yvelocity, rb.velocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -90,10 +94,18 @@ public class playerControl : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // Check if alive when hp implemented
-        if (context.started && touching_directions.IsGrounded)
+        if (context.started && touching_directions.IsGrounded && CanMove)
         {
             animator.SetTrigger(animatorStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(animatorStrings.attack);
         }
     }
 
@@ -109,6 +121,17 @@ public class playerControl : MonoBehaviour
         {
             //Mirar a la izquierda
             isFacingRight = false;
+        }
+    }
+
+    private void MovementStart()
+    {
+        // FUnción debe ser cambiada a no void y que devuelva un array que se actualice en FixedUpdate en vez de aquí
+        // Si se quiere añadir otros tipos de movimiento también
+        if (CanMove)
+        {
+            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            animator.SetFloat(animatorStrings.yvelocity, rb.velocity.y);
         }
     }
 
