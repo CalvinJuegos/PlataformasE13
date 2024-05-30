@@ -11,4 +11,6 @@ internal class animatorStrings
     internal static string jump = "jump";
     internal static string attack = "attack";
     internal static string canMove = "canMove";
+    internal static string dash = "dash";
+    internal static string isDashing = "isDashing";
 }

@@ -131,12 +131,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpImpulse: 10
-  maxJumpHeight: 4
-  minJumpHeight: 1
-  timeToJumpApex: 0.4
-  dashingTime: 0.2
-  dashingCooldown: 1
+  dashingPower: 4
+  dashSpeed: 40
+  dashCooldown: 0.5
+  dashDuration: 3
+  canDash: 1
   _isMoving: 0
+  _isDashing: 0
   _isFacingRight: 1
 --- !u!114 &1207160683505469822
 MonoBehaviour:
@@ -256,6 +257,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5500c0d6-fced-4be9-a34b-3680460cab38
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4038433590564401751}
+        m_TargetAssemblyTypeName: playerControl, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ed80e8df-0f09-4e2c-b360-e1685c4d7f2f
+    m_ActionName: Player/Dash[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

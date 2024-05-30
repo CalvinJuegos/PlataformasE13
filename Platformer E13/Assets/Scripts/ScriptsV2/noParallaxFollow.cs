@@ -1,22 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class NoParallaxFollow : MonoBehaviour
+public class noParallaxFollow : MonoBehaviour
 {
-    public Transform cameraTransform;
+    private Transform cameraTransform;
+    private Vector3 initialPosition;
+    private Vector3 cameraInitialPosition;
 
-    private Vector3 offset;
-
-    private void Start()
+    void Start()
     {
-        // Calcula la diferencia inicial entre la posición de la cámara y la posición del fondo
-        offset = transform.position - cameraTransform.position;
+        // Get the main camera's transform
+        cameraTransform = Camera.main.transform;
+
+        // Record the initial positions of the background and the camera
+        initialPosition = transform.position;
+        cameraInitialPosition = cameraTransform.position;
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        // Actualiza la posición del fondo para que siga la cámara, manteniendo el offset inicial
-        transform.position = cameraTransform.position + offset;
+        // Calculate the camera's movement
+        Vector3 cameraMovement = cameraTransform.position - cameraInitialPosition;
+
+        // Adjust the background's position to follow the camera's movement
+        transform.position = initialPosition + new Vector3(cameraMovement.x, cameraMovement.y, 0);
     }
 }
