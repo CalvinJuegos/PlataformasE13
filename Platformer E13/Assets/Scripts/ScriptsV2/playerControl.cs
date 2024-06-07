@@ -152,7 +152,7 @@ public class playerControl : MonoBehaviour
         // Añadir IFrames y check health
         if (context.started && touching_directions.IsGrounded && CanMove && canDash)
         {
-            StartCoroutine(Dash());
+            StartCoroutine(HandleDash());
         }          
     }
 
@@ -179,7 +179,7 @@ public class playerControl : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash()
+    private IEnumerator HandleDash()
     {
         animator.SetTrigger(animatorStrings.dash);
         // No acelera
