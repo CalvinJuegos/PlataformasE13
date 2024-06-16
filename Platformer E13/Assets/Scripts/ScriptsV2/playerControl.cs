@@ -71,6 +71,14 @@ public class playerControl : MonoBehaviour
             return animator.GetBool(animatorStrings.canMove);
         } }
 
+    public bool IsAlive
+    {
+        get
+        {
+            return animator.GetBool(animatorStrings.isAlive);
+        }
+    }
+
     public float CurrentMoveSpeed { get
         {
             if (CanMove)
@@ -130,10 +138,19 @@ public class playerControl : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-         
-        IsMoving = moveInput != Vector2.zero;
 
-        SetDirection(moveInput);
+        if (IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
+
+            SetDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
+         
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -150,7 +167,7 @@ public class playerControl : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {   
         // Añadir IFrames y check health
-        if (context.started && touching_directions.IsGrounded && CanMove && canDash)
+        if (context.started && touching_directions.IsGrounded && CanMove && canDash && IsAlive)
         {
             StartCoroutine(HandleDash());
         }          
