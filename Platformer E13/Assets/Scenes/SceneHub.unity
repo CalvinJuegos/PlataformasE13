@@ -288,9 +288,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: JumpPower
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: moveSpeed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: colliderTouch
+      value: 
+      objectReference: {fileID: 1819389466}
     - target: {fileID: 7724253135964571159, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
       propertyPath: m_GravityScale
@@ -424,7 +434,7 @@ GameObject:
   - component: {fileID: 605979422}
   - component: {fileID: 605979421}
   - component: {fileID: 605979424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HubPelucasFuente
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +624,7 @@ GameObject:
   - component: {fileID: 1026752693}
   - component: {fileID: 1026752692}
   - component: {fileID: 1026752691}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,7 +2011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191046841}
   - component: {fileID: 1191046840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HubPelucasV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2352,6 +2362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfac6eb7ab95bb46b0174a1d75cd763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &1819389466 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1449309654450130249, guid: 58db49ef1f91ae446bcc48841778fa28,
+    type: 3}
+  m_PrefabInstance: {fileID: 326189717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2124002059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,7 +2423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2127067758}
   - component: {fileID: 2127067757}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HubProstibuloV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2518,6 +2534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InteractableCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 184493601024227620, guid: 418fcf5f07acb4f48b5b82ba938fe15d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4800139491915643075, guid: 418fcf5f07acb4f48b5b82ba938fe15d,
         type: 3}

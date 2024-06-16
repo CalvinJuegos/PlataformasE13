@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1207160683505469822}
   - component: {fileID: 4170387456268863150}
   - component: {fileID: 1449309654450130249}
-  - component: {fileID: 4106100261234156285}
   - component: {fileID: 8911900103807456210}
   m_Layer: 0
   m_Name: Player
@@ -131,17 +130,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpImpulse: 10
+  castFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  groundDistance: 0.05
+  wallDistance: 0.05
+  _onGround: 0
+  _onWall: 0
+  _isMoving: 0
+  _isDashing: 0
+  _isFacingRight: 1
+  slideSpeed: 0.5
+  colliderTouch: {fileID: 1449309654450130249}
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  JumpPower: 10
+  MaxFallSpeed: 40
+  FallAcceleration: 110
+  JumpEndEarlyGravityModifier: 3
+  CoyoteTime: 0.15
+  JumpBuffer: 0.2
+  canDash: 1
   dashingPower: 4
   dashSpeed: 40
   dashCooldown: 0.5
   dashDuration: 3
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
-  canDash: 1
-  _isMoving: 0
-  _isDashing: 0
-  _isFacingRight: 1
 --- !u!114 &1207160683505469822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,35 +378,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.078695536, y: -0.2585714}
   m_Size: {x: 1.0545373, y: 3.5278268}
   m_Direction: 0
---- !u!114 &4106100261234156285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3182294109459327245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fba2fbb5cfc4f41a8ee0f815126e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  castFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  groundDistance: 0.05
-  touchingCol: {fileID: 0}
-  _isGrounded: 0
 --- !u!114 &8911900103807456210
 MonoBehaviour:
   m_ObjectHideFlags: 0

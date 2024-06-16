@@ -3,36 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(touchingDirections))] 
-
 
 public class playerControl : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpImpulse = 10f;
-    public float dashingPower = 4f;
-    public float dashSpeed = 10f;
-    public float dashCooldown = 3f;
-    public float dashDuration = 3f;
-
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-
-    public bool canDash = true;
-
-    //public float maxJumpHeight = 4;
-    //public float minJumpHeight = 1;
-    //public float timeToJumpApex = .4f;
-    //float accelerationTimeAirborne = .2f;
-    //float accelerationTimeGrounded = .1f;
-
-    //rivate float dashingPower = 24f;
-    //public float dashingTime = 0.2f;
-    //public float dashingCooldown = 1f;
-
-    touchingDirections touching_directions;
+    public float speedDiff;
+    public float movement;
+    public float accelRate = 1f;
 
     Vector2 moveInput;
+
+    public ContactFilter2D castFilter;
+    public float groundDistance = 0.05f;
+    public float wallDistance = 0.05f;
+
+    [SerializeField]
+    private bool _onGround;
+    [SerializeField]
+    private bool _onWall;
+
+    public bool onGround
+    {
+        get
+        {
+            return _onGround;
+        }
+        private set
+        {
+            _onGround = value;
+            animator.SetBool(animatorStrings.onGround, value);
+        }
+    }
+
+    public bool onWall
+    {
+        get
+        {
+            return _onWall;
+        }
+        private set
+        {
+            _onWall = value;
+            // animator.SetBool(animatorStrings.onWall, value);
+        }
+    }
 
     [SerializeField]
     private bool _isMoving = false;
@@ -66,13 +80,13 @@ public class playerControl : MonoBehaviour
             _isFacingRight = value;
         }}
 
+    [SerializeField]
     public bool CanMove { get 
         {
             return animator.GetBool(animatorStrings.canMove);
         } }
-    
-    // Need to implement animator
 
+    [SerializeField]
     public bool IsAlive
     {
         get
@@ -108,33 +122,60 @@ public class playerControl : MonoBehaviour
             
         } }
 
+    public float slideSpeed;
+
     Rigidbody2D rb;
     Animator animator;
+    public CapsuleCollider2D colliderTouch;
+    RaycastHit2D[] groundHits = new RaycastHit2D[5];
+    RaycastHit2D[] wallHits = new RaycastHit2D[5];
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        touching_directions = GetComponent<touchingDirections>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-            
+        colliderTouch = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
-
+    
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+        Debug.Log("This is "+moveInput);
+
+        if (IsMoving)
+        {
+            handleMovement();
+        }
+        
+        checkCollisions();
+
+        if (onWall & !onGround)
+        {
+            Debug.Log("is on wall");
+            handleWall();
+        }
+
         animator.SetFloat(animatorStrings.yvelocity, rb.velocity.y);
 
+    }
+    private void SetDirection(Vector2 moveInput)
+    {
+        if (moveInput.x > 0 && !isFacingRight)
+        {
+            //Mirar a la derecha
+            isFacingRight = true;
+
+        }
+        else if (moveInput.x < 0 && isFacingRight)
+        {
+            //Mirar a la izquierda
+            isFacingRight = false;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext move)
@@ -151,56 +192,85 @@ public class playerControl : MonoBehaviour
         {
             IsMoving = false;
         }
-         
-        
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    private void handleMovement()
+    {
+        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+
+        //speedDiff =moveInput.x*moveSpeed
+        //speedDiff = moveSpeed - rb.velocity.x;
+        //movement = speedDiff * accelRate;
+        //rb.AddForce(movement * moveInput);
+    }
+
+    private void checkCollisions()
+    {
+        onGround = colliderTouch.Cast(Vector2.down, castFilter, groundHits, groundDistance) > 0;
+        onWall = colliderTouch.Cast(Vector2.left, castFilter, wallHits, wallDistance) > 0 ||
+                colliderTouch.Cast(Vector2.right, castFilter, wallHits, wallDistance) > 0;
+
+    }
+    
+    private void handleWall()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, - slideSpeed);
+    }
+
+    #region Jumping
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+    [Header("JUMP")]
+    [Tooltip("The immediate velocity applied when jumping")]
+    public float JumpPower = 10f;
+
+    [Tooltip("The maximum vertical movement speed")]
+    public float MaxFallSpeed = 40;
+
+    [Tooltip("The player's capacity to gain fall speed. a.k.a. In Air Gravity")]
+    public float FallAcceleration = 110;
+
+    [Tooltip("The gravity multiplier added when jump is released early")]
+    public float JumpEndEarlyGravityModifier = 3;
+
+    [Tooltip("The time before coyote jump becomes unusable. Coyote jump allows jump to execute even after leaving a ledge")]
+    public float CoyoteTime = .15f;
+
+    [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
+    public float JumpBuffer = .2f;
+    public void OnJump(InputAction.CallbackContext jump)
     {
         // Check if alive when hp implemented
-        if (context.started && touching_directions.IsGrounded && CanMove)
+        if (jump.performed && onGround && CanMove)
         {
             Debug.Log("Jumping Started");
             animator.SetTrigger(animatorStrings.jump);
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+            rb.velocity = new Vector2(rb.velocity.x, JumpPower);
             //rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             //rb.AddForce()
         }
+        if (jump.canceled && rb.velocity.y > 0.5f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * lowJumpMultiplier);
+        }
     }
+    #endregion
 
+    #region Dashing
+    public bool canDash = true;
+    public float dashingPower = 4f;
+    public float dashSpeed = 10f;
+    public float dashCooldown = 3f;
+    public float dashDuration = 3f;
     public void OnDash(InputAction.CallbackContext context)
     {   
         // Añadir IFrames y check health
-        if (context.started && touching_directions.IsGrounded && CanMove && canDash && IsAlive)
+        if (context.started && onGround && CanMove && canDash && IsAlive)
         {
             Debug.Log("Dashing started");
             StartCoroutine(HandleDash());
         }          
     }
-
-    public void OnAttack(InputAction.CallbackContext attack)
-    {
-        if (attack.started)
-        {
-            animator.SetTrigger(animatorStrings.attack);
-        }
-    }
-
-    private void SetDirection(Vector2 moveInput)
-    {
-        if (moveInput.x > 0 && !isFacingRight)
-        {
-            //Mirar a la derecha
-            isFacingRight = true;
-
-        }
-        else if (moveInput.x < 0 && isFacingRight)
-        {
-            //Mirar a la izquierda
-            isFacingRight = false;
-        }
-    }
-
     private IEnumerator HandleDash()
     {
         animator.SetTrigger(animatorStrings.dash);
@@ -220,6 +290,20 @@ public class playerControl : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+    #endregion
+
+    #region Attack
+    public void OnAttack(InputAction.CallbackContext attack)
+    {
+        if (attack.started)
+        {
+            animator.SetTrigger(animatorStrings.attack);
+        }
+    }
+    #endregion
+    
+
+    
 
     //private void MovementStart()
     //{
