@@ -13,6 +13,5 @@ public class gatewayToLevel : MonoBehaviour
         // Siguiente nivel
         Debug.Log(sceneID);
         SceneManager.LoadSceneAsync(sceneID);
-        //SceneController.instance.LoadSceneAsync(sceneID);
     }
 }
