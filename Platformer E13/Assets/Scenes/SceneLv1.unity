@@ -174,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnJump
+      value: OnDash
       objectReference: {fileID: 0}
     - target: {fileID: 1207160683505469822, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}

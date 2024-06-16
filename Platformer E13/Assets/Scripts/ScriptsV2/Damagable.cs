@@ -87,6 +87,5 @@ public class Damagable : MonoBehaviour
             }
             timeSinceHit += Time.deltaTime;
         }
-        Hit(10);
     }
 }

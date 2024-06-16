@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8911900103807456210}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,10 +185,6 @@ MonoBehaviour:
     m_ActionId: 94eed395-e076-409c-bcc5-17e0550c9090
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4e333c6d-edd2-46a9-8058-890161aea7cc
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4038433590564401751}
         m_TargetAssemblyTypeName: playerControl, Assembly-CSharp
@@ -276,6 +272,27 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ed80e8df-0f09-4e2c-b360-e1685c4d7f2f
     m_ActionName: Player/Dash[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4800139491915643075, guid: 418fcf5f07acb4f48b5b82ba938fe15d,
+          type: 3}
+        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 17f60639-738e-41be-9811-9945882b26c9
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a8e6d27-b92c-45ad-bb4e-9df25971e990
+    m_ActionName: Player/Heal[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -378,3 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6dbabad2c3ae845912957e2b5ee259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _health: 100
+  _isAlive: 1
+  isInvincible: 0

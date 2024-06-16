@@ -70,6 +70,8 @@ public class playerControl : MonoBehaviour
         {
             return animator.GetBool(animatorStrings.canMove);
         } }
+    
+    // Need to implement animator
 
     public bool IsAlive
     {
@@ -135,9 +137,9 @@ public class playerControl : MonoBehaviour
 
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext move)
     {
-        moveInput = context.ReadValue<Vector2>();
+        moveInput = move.ReadValue<Vector2>();
 
         if (IsAlive)
         {
@@ -158,9 +160,11 @@ public class playerControl : MonoBehaviour
         // Check if alive when hp implemented
         if (context.started && touching_directions.IsGrounded && CanMove)
         {
+            Debug.Log("Jumping Started");
             animator.SetTrigger(animatorStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
             //rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            //rb.AddForce()
         }
     }
 
@@ -169,13 +173,14 @@ public class playerControl : MonoBehaviour
         // Añadir IFrames y check health
         if (context.started && touching_directions.IsGrounded && CanMove && canDash && IsAlive)
         {
+            Debug.Log("Dashing started");
             StartCoroutine(HandleDash());
         }          
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext attack)
     {
-        if (context.started)
+        if (attack.started)
         {
             animator.SetTrigger(animatorStrings.attack);
         }
