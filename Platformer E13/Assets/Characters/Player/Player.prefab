@@ -130,6 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  speedDiff: 0
+  movement: 0
+  accelRate: 1
   castFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -154,11 +157,11 @@ MonoBehaviour:
   slideSpeed: 0.5
   colliderTouch: {fileID: 1449309654450130249}
   fallMultiplier: 2.5
-  lowJumpMultiplier: 2
-  JumpPower: 10
+  lowJumpMultiplier: 0.5
+  JumpPower: 8
   MaxFallSpeed: 40
   FallAcceleration: 110
-  JumpEndEarlyGravityModifier: 3
+  JumpEndEarlyGravityModifier: 1.9
   CoyoteTime: 0.15
   JumpBuffer: 0.2
   canDash: 1
