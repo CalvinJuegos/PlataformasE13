@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damagable : MonoBehaviour
+public class playerHealth : MonoBehaviour
 {
     Animator animator;
 
@@ -69,6 +69,7 @@ public class Damagable : MonoBehaviour
     {
         if(IsAlive && !isInvincible)
         {
+            Debug.Log("Hit for:" + damage);
             Health -= damage;
             isInvincible = true;
         }

@@ -154,7 +154,7 @@ MonoBehaviour:
   _isMoving: 0
   _isDashing: 0
   _isFacingRight: 1
-  slideSpeed: 0.5
+  slideSpeed: 0.9
   colliderTouch: {fileID: 1449309654450130249}
   fallMultiplier: 2.5
   lowJumpMultiplier: 0.5

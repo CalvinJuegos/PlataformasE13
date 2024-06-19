@@ -145,7 +145,6 @@ public class playerControl : MonoBehaviour
     
     private void FixedUpdate()
     {
-        Debug.Log("This is "+moveInput);
 
         if (IsMoving)
         {
