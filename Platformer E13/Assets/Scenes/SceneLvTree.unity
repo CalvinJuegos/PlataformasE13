@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 617376968}
   - component: {fileID: 617376970}
   - component: {fileID: 617376971}
+  - component: {fileID: 617376972}
   m_Layer: 8
   m_Name: arbolProvisional
   m_TagString: Enemy
@@ -542,6 +543,24 @@ MonoBehaviour:
   isInvincible: 0
   stunDuration: 3
   percentRecovered: 0.15
+--- !u!114 &617376972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617376967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0c075e3660171498d71b1393bbb943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1819389458}
+  projectilePrefab: {fileID: 9210328924175510484, guid: c1dcab51fcc7e3e4ca2438474c06b641,
+    type: 3}
+  spawnPosition: {x: 0, y: 0}
+  fireRate: 0.5
+  nextFireTime: 3
 --- !u!1 &844506619
 GameObject:
   m_ObjectHideFlags: 3

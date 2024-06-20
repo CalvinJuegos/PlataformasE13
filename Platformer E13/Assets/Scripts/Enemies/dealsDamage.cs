@@ -27,9 +27,9 @@ public class dealsDamage : MonoBehaviour
         }
     }
 
-    private void dealDamage(float damage,playerHealth player)
+    public void dealDamage(float damage,playerHealth player)
     {
-        Debug.Log("Enters Damage");
+        Debug.Log("Hit for"+damage);
         player.Hit(damage);
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Through
   - Ground
   - Enemy
+  - Effect
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Prop
   - Player
   - Obstacle
-  - 
+  - Effect
   - 
   - 
   - 
@@ -47,7 +48,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Buildings
+  - name: Props
     uniqueID: 112240219
     locked: 0
   - name: Tiles
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4206130471
+    locked: 0
+  - name: Effects
+    uniqueID: 4209649929
     locked: 0
