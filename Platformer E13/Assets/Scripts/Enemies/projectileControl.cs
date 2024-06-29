@@ -37,26 +37,6 @@ public class projectileControl : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Entered collider, dealing "+projDamage);
-
-            playerHealth player = collision.GetComponent<playerHealth>();
-            dealsDamage DealsDamage = GetComponent<dealsDamage>();
-
-            if (DealsDamage != null) // HERE IS THE ERROR
-            {
-                DealsDamage.dealDamage(projDamage, player);
-            }
-            else { Debug.Log("Errro"); }
-            Destroy(gameObject);
-
-            
-        }
-    }
-
     private void projMovement()
     {
         transform.Translate(targetDirection * projSpeed * Time.deltaTime);

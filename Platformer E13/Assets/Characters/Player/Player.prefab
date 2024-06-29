@@ -106,7 +106,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f91f2cc77cf0d2341b76827bb0ee3979, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -129,10 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfac6eb7ab95bb46b0174a1d75cd763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  speedDiff: 0
-  movement: 0
-  accelRate: 1
+  colliderTouch: {fileID: 1449309654450130249}
   castFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -154,8 +151,12 @@ MonoBehaviour:
   _isMoving: 0
   _isDashing: 0
   _isFacingRight: 1
+  moveSpeed: 30
+  speedDiff: 0
+  movement: 0
+  accelRate: 100
+  decelRate: 25
   slideSpeed: 0.9
-  colliderTouch: {fileID: 1449309654450130249}
   fallMultiplier: 2.5
   lowJumpMultiplier: 0.5
   JumpPower: 8

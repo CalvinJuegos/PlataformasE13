@@ -24,6 +24,7 @@ public class dealsDamage : MonoBehaviour
             playerHealth player = collision.GetComponent<playerHealth>();
             
             dealDamage(damageDealt,player);
+            Destroy(gameObject);
         }
     }
 

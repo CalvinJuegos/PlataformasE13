@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8774732619514161716}
   - component: {fileID: 494343558656677400}
   - component: {fileID: -4420506196770017283}
+  - component: {fileID: -3580420643550814149}
   m_Layer: 11
   m_Name: proyectilProv
   m_TagString: Effect
@@ -137,3 +138,16 @@ CircleCollider2D:
   m_Offset: {x: -0.43963718, y: -0.45497334}
   serializedVersion: 2
   m_Radius: 0.463233
+--- !u!114 &-3580420643550814149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9210328924175510484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3063330660d49a4fa9994b10d34c776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 25
