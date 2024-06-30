@@ -131,8 +131,7 @@ public class playerControl : MonoBehaviour
             else
             {
                 return 0;
-            }
-            
+            }  
         } }
     
     #endregion
