@@ -230,7 +230,6 @@ public class playerControl : MonoBehaviour
         if (CanMove && IsAlive){
             if (Mathf.Abs(moveInputX) > 0.1f) // Apply force when there is input
             {
-                Debug.Log("key pressed");
 
                 float targetSpeed = moveInputX * moveSpeed;           
                 float speedDiff = targetSpeed - rb.velocity.x;
@@ -244,16 +243,14 @@ public class playerControl : MonoBehaviour
             }
             else // Apply deceleration force when there is no input
             {
-                Debug.Log("No key pressed");
                 if (Mathf.Abs(rb.velocity.x) > 0.1f) // Check if the player is moving
                 {
-                    Debug.Log("Decel");
                     float decelerationForce = rb.velocity.x * decelRate;
                     rb.AddForce(new Vector2(-decelerationForce, 0f));
                 }
                 else // Stop the player completely if the velocity is very low
                 {
-                    Debug.Log("Stop");
+
                     rb.velocity = new Vector2(0f, rb.velocity.y);
                 }
             }
@@ -389,12 +386,33 @@ public class playerControl : MonoBehaviour
 
     #region Attack
     //[Header("ATTACK")]
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+
     public void OnAttack(InputAction.CallbackContext attack)
     {
         if (attack.started)
         {
             animator.SetTrigger(animatorStrings.attack);
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("Hit enemy");
+            }
         }
+        
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null){
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     #endregion
 

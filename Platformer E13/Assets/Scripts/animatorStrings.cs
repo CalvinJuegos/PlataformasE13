@@ -4,6 +4,7 @@ using UnityEngine;
 
 internal class animatorStrings
 {
+    // PLAYER STRINGS
     internal static string isMoving = "isMoving";
     internal static string isRunning = "isRunning";
     internal static string onGround = "onGround";
@@ -14,4 +15,7 @@ internal class animatorStrings
     internal static string dash = "dash";
     internal static string isDashing = "isDashing";
     internal static string isAlive = "isAlive";
+
+    // BOSS 1 STRINGS
+    internal static string backOff = "backOff";
 }

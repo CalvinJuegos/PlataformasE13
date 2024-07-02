@@ -8,9 +8,9 @@ public class boss3Behaviour : MonoBehaviour
     public Transform playerTransform;
     public GameObject projectilePrefab;
 
-    public Collider2D colliderContactDmg;
-    public Collider2D colliderBackOff;
-    public Collider2D colliderCover;
+    //public Collider2D colliderContactDmg;
+    //public Collider2D colliderBackOff;
+    //public Collider2D colliderCover;
 
     public bool finishedMainAttack = true;
     public int takenHits;
@@ -18,26 +18,43 @@ public class boss3Behaviour : MonoBehaviour
     private damagable Damagable;
     private detectionPushRange DetectionPushRange;
     private playerControl PlayerControl;
+    //private animatorStrings AnimatorStrings;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
+
+        PlayerControl = GameObject.FindWithTag("Player").GetComponent<playerControl>();       
+        Damagable = GetComponent<damagable>();
+        DetectionPushRange = GameObject.FindWithTag("Area").GetComponent<detectionPushRange>();
+        
+
+        attackAnim = GameObject.FindWithTag("attackAnimator").GetComponent<Animator>();
     }
 
     private void ChooseAttack()
     {
-        Debug.Log("Elegir ataque");
-        if (PlayerControl.IsAlive && !Damagable.IsStunned) 
+        if (Damagable == null)
         {
-            
+            Debug.LogError("Damagable is not initialized!");
+            return;
+        }
+
+        if (PlayerControl== null){
+            Debug.LogError("PlayerControl is not initialized!");
+            return;
+        }
+        //bool isPlayerAlive = PlayerControl.IsAlive;
+        //Debug.Log("Elegir ataque"+PlayerControl.IsAlive); // Error popping up HERE!!!
+        if (PlayerControl.IsAlive && !Damagable.IsStunned)
+        {
+            Debug.Log("Eligiendo");
             System.Random rng = new System.Random();
             int randomValue = rng.Next(100); // Random number between 0 and 99
 
             if (DetectionPushRange.InRangeForPush)
             {
-                // While in range it can do:
-                // High chance: backOff, flowerAttack, lightBeam
-                // Medium chance: immuneBackOff, lightFlash
+                Debug.Log("En rango");
 
                 if (randomValue < 50) // 50% chance
                 {
@@ -45,15 +62,16 @@ public class boss3Behaviour : MonoBehaviour
                     int highChanceRandom = rng.Next(3);
                     if (highChanceRandom == 0)
                     {
-                        BackOff();
+                        Debug.Log("Back Off");
+                        StartCoroutine(BackOff());
                     }
                     else if (highChanceRandom == 1)
                     {
-                        FlowerAttack();
+                        StartCoroutine(FlowerAttack());
                     }
                     else if (highChanceRandom == 2)
                     {
-                        LightBeam();
+                        StartCoroutine(LightBeam());
                     }
                 }
                 else // 50% chance
@@ -62,15 +80,15 @@ public class boss3Behaviour : MonoBehaviour
                     int mediumChanceRandom = rng.Next(2);
                     if (mediumChanceRandom == 0)
                     {
-                        ImmuneBackOff();
+                        StartCoroutine(ImmuneBackOff());
                     }
                     else if (mediumChanceRandom == 1)
                     {
-                        LightFlash();
+                        StartCoroutine(LightFlash());
                     }
                 }
-            } 
-            else 
+            }
+            else
             {
                 // While not in range:
                 // High chance: flowerAttack, lightBeam
@@ -82,11 +100,11 @@ public class boss3Behaviour : MonoBehaviour
                     int highChanceRandom = rng.Next(2);
                     if (highChanceRandom == 0)
                     {
-                        FlowerAttack();
+                        StartCoroutine(FlowerAttack());
                     }
                     else if (highChanceRandom == 1)
                     {
-                        LightBeam();
+                        StartCoroutine(LightBeam());
                     }
                 }
                 else // 50% chance
@@ -95,19 +113,19 @@ public class boss3Behaviour : MonoBehaviour
                     int mediumChanceRandom = rng.Next(3);
                     if (mediumChanceRandom == 0)
                     {
-                        ImmuneBackOff();
+                        StartCoroutine(ImmuneBackOff());
                     }
                     else if (mediumChanceRandom == 1)
                     {
-                        LightFlash();
+                        StartCoroutine(LightFlash());
                     }
                     else if (mediumChanceRandom == 2)
                     {
-                        BackOff();
+                        StartCoroutine(BackOff());
                     }
                 }
             }
-        } 
+        }
     }
 
     // Update is called once per frame
@@ -134,13 +152,52 @@ public class boss3Behaviour : MonoBehaviour
     // If boss has taken too many hits of the player the more chance it has of doing the attack
     // If player is range, can do the attack
     // Taken HiTS
+    #region Back Off
+    public Collider2D backOffArea;
+    public Animator attackAnim;
 
     IEnumerator BackOff() 
     {
         Debug.Log("BackOff");
-        //Pushes back player and deals medium damage
-        yield return null;
+        finishedMainAttack = false;
+        //Play animation
+        attackAnim.SetTrigger(animatorStrings.backOff);
+
+        yield return new WaitForEndOfFrame();
+
+        AnimatorStateInfo stateInfo = attackAnim.GetCurrentAnimatorStateInfo(0);
+        float animationLength = stateInfo.length;
+
+        yield return new WaitForSeconds(animationLength);
+
+        while (attackAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !attackAnim.IsInTransition(0))
+        {
+            yield return null;
+        }
+
+        // Damage handled in collider
+
+        finishedMainAttack = true;
+        Debug.Log("Finished attack");
     }
+
+    public void EnableBackOffArea()
+    {
+        if (backOffArea != null)
+        {
+            backOffArea.enabled = true;
+        }
+    }
+
+    public void DisableBackOffArea()
+    {
+        if (backOffArea != null)
+        {
+            backOffArea.enabled = false;
+        }
+    }
+
+    #endregion
 
     // Attack that triggers regularly, most common, main damage
     IEnumerator FlowerAttack()
@@ -164,7 +221,8 @@ public class boss3Behaviour : MonoBehaviour
     {
         Debug.Log("LightBeam");
         // Activates the objectsColliders with dealsDamage and triggers their lightning animation
-        // Randomness could choose which one to activate.
+        // There are to differnt types, chosen one after the other
+
         
         yield return null;
     }

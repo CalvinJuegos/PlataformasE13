@@ -142,7 +142,7 @@ public class damagable : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void enemyHit(float damage,float poiseDamage)
+    public void onHit(float damage,float poiseDamage)
     {
         if(IsStunned && IsAlive && !isInvincible)
         {

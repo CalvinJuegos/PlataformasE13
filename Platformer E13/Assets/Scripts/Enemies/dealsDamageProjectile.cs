@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dealsDamage : MonoBehaviour
+public class dealsDamageProjectile : MonoBehaviour
 {
     //public Collider2D collider;
     //private Animator animator;
@@ -18,12 +18,12 @@ public class dealsDamage : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-
             Debug.Log("Entered collider");
             // Check if the other collider has the PlayerHealth component
             playerHealth player = collision.GetComponent<playerHealth>();
             
             dealDamage(damageDealt,player);
+            Destroy(gameObject);
         }
     }
 

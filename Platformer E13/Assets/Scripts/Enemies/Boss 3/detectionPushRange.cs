@@ -17,10 +17,12 @@ public class detectionPushRange : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("In range for push");
             InRangeForPush = true;
         }
 
     }
+
     public void OnTriggerExit2D(Collider2D collision)
     {
         InRangeForPush = false;
