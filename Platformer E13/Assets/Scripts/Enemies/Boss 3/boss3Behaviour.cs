@@ -200,9 +200,35 @@ public class boss3Behaviour : MonoBehaviour
     #endregion
 
     // Attack that triggers regularly, most common, main damage
+
+    public Animator attackFlower;
+    public GameObject[] flowers;
+
     IEnumerator FlowerAttack()
     {
         Debug.Log("flowerAttack");
+        finishedMainAttack = false;
+
+        //GameObject[] flowers = GameObject.FindGameObjectsWithTag("Flower");
+        Debug.Log("Setting active"+flowers);
+
+        foreach (GameObject flower in flowers) // This part does not execute
+        {
+            Debug.Log("Setting active");
+            flower.SetActive(true);
+
+            Animator animator = flower.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetTrigger(animatorStrings.flowerStart);
+                Debug.Log("animadorEmpieza");
+            }
+            else
+            {
+                Debug.LogError($"Animator component not found on GameObject: {flower.name}");
+            }
+        }
+
         // Creates flower objects that explode in a certain time
         // Deals high damage
         yield return null;

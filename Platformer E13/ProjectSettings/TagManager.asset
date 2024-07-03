@@ -10,6 +10,7 @@ TagManager:
   - Effect
   - Area
   - attackAnimator
+  - Flower
   layers:
   - Default
   - TransparentFX
