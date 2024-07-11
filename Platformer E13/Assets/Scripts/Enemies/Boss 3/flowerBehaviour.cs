@@ -5,6 +5,8 @@ using UnityEngine;
 public class flowerBehaviour : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public Transform spawnPoint;
+    public float projectileSpeed = 100f;
     public float spawnRadius = 2.0f;
     public float outwardSpeed = 5.0f;
     public float rotationSpeed = 50.0f;
@@ -12,22 +14,67 @@ public class flowerBehaviour : MonoBehaviour
 
     public void spawnProjectiles()
     {
-        Debug.Log("Spawnea");
-        for (int i = 0; i < 4; i++)
+        /// Directions in which to spawn projectiles
+        Vector2[] directions = new Vector2[]
         {
+            Vector2.up,
+            Vector2.down,
+            Vector2.left,
+            Vector2.right
+        };
 
-            float angle = i * Mathf.PI / 2; // 0, 90, 180, 270 degrees in radians
-            // Calculate spawn position around the spawner
-            Vector3 spawnPosition = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * spawnRadius;
+        // Determine the spawn position
+        Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : transform.position;
 
+        foreach (Vector2 direction in directions)
+        {
             // Instantiate the projectile
-            GameObject projectile = Instantiate(projectilePrefab, transform.position + spawnPosition, Quaternion.identity);
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+            Debug.Log("Projectile instantiated at: " + spawnPosition);
 
-            projectileControlv2 movement = projectile.AddComponent<projectileControlv2>();
-            movement.outwardSpeed = outwardSpeed;
-            movement.rotationSpeed = rotationSpeed;
-            movement.lifespan = projectileLifespan;
-
+            // Initialize the projectile direction and speed
+            projectileControl projScript = projectile.GetComponent<projectileControl>();
+            if (projScript != null)
+            {
+                projScript.InitializeDirection(direction);
+                projScript.projSpeed = projectileSpeed;
+                Debug.Log("Projectile direction initialized: " + direction);
+            }
+            else
+            {
+                Debug.LogError("No projectileControl component found on the projectile prefab.");
+            }
         }
     }
+
+    /*
+    public void spawnProjectiles()
+    {
+        // Directions in which to spawn projectiles
+        Debug.Log("Spawnea");  
+        Vector2[] directions = new Vector2[]
+        {
+        Vector2.up,
+        Vector2.down,
+        Vector2.left,
+        Vector2.right
+        };
+
+        Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : transform.position;
+
+        foreach (Vector2 direction in directions)
+        {
+            // Instantiate the projectile
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+            // Get the Rigidbody2D component to apply velocity
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Debug.Log("Projectile set");
+                rb.velocity = direction * projectileSpeed;
+            }
+        }
+    }
+    */
 }

@@ -11,6 +11,7 @@ TagManager:
   - Area
   - attackAnimator
   - Flower
+  - Boss
   layers:
   - Default
   - TransparentFX

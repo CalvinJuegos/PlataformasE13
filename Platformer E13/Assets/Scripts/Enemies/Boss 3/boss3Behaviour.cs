@@ -8,11 +8,25 @@ public class boss3Behaviour : MonoBehaviour
     public Transform playerTransform;
     public GameObject projectilePrefab;
 
-    //public Collider2D colliderContactDmg;
-    //public Collider2D colliderBackOff;
-    //public Collider2D colliderCover;
+    private bool _finishedMainAttack = true;
+    public bool finishedMainAttack
+    {
+        get
+        {
+            return _finishedMainAttack;
+        }
+        private set
+        {
+            _finishedMainAttack = value;
+            Debug.Log("Ended attack!!!!!");
+        }
+    }
 
-    public bool finishedMainAttack = true;
+    public void SetFinishedMainAttack(bool value)
+    {
+        finishedMainAttack = value;
+    }
+
     public int takenHits;
 
     private damagable Damagable;
@@ -131,22 +145,22 @@ public class boss3Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Attack"+finishedMainAttack);
         if (finishedMainAttack)
         {
             // CHooses main attack depending on player position
-            ChooseAttack();
-            
+            ChooseAttack();           
         }
 
         // For continuos attacks (Fire rate phase 1 low, fire rate phase 2 higher)
         if (Time.time >= nextFireTime)
-        { 
+        {
+            Debug.Log("Basic Spawn Starts");
             // !! Spawn position is SET HERE (Can set different types of projectiles to different places with function)
-            spawnPosition = transform.position;       
-            FireProjectile(spawnPosition);
+            spawnPosition = transform.position;
+            StartCoroutine(FireProjectile(spawnPosition));
             nextFireTime = Time.time + 1f / fireRate;
-        }        
-
+        } 
     }
 
     // If boss has taken too many hits of the player the more chance it has of doing the attack
@@ -269,6 +283,7 @@ public class boss3Behaviour : MonoBehaviour
 
     IEnumerator FireProjectile(Vector2 spawn)
     {
+        Debug.Log("FireProjectile");
         if (playerTransform != null)
         {
             // Calculate the direction to the player
@@ -282,6 +297,7 @@ public class boss3Behaviour : MonoBehaviour
             projectileControl projScript = projectile.GetComponent<projectileControl>();
             if (projScript != null)
             {
+                Debug.Log("InstantiateProjectileBasic");
                 projScript.InitializeDirection(direction);
             }
         }

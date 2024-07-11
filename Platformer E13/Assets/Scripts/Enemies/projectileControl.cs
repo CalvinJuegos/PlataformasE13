@@ -17,6 +17,7 @@ public class projectileControl : MonoBehaviour
     public Vector2 targetDirection;
     public float projSpeed;
     public float projDamage;
+    public float lifespan;
 
 
     private void Awake()
@@ -24,9 +25,10 @@ public class projectileControl : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void InitializeDirection(Vector2 direction)
+    public virtual void InitializeDirection(Vector2 direction)
     {
         targetDirection = direction.normalized;
+        StartCoroutine(lifeSpan());
     }
 
     // Update is called once per frame
@@ -37,8 +39,14 @@ public class projectileControl : MonoBehaviour
         
     }
 
-    private void projMovement()
+    protected void projMovement()
     {
         transform.Translate(targetDirection * projSpeed * Time.deltaTime);
+    }
+
+    IEnumerator lifeSpan()
+    {
+        yield return new WaitForSeconds(lifespan);
+        Destroy(this.gameObject);
     }
 }
