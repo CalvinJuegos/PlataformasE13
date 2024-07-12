@@ -161,6 +161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: JumpPower
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: accelRate
       value: 9
       objectReference: {fileID: 0}
@@ -178,6 +183,16 @@ PrefabInstance:
         type: 3}
       propertyPath: attackRange
       value: 1.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: fallMultiplier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: FallAcceleration
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 7724253135964571159, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}

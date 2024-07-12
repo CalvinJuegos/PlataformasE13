@@ -44,6 +44,7 @@ public class boss3Behaviour : MonoBehaviour
         
 
         attackAnim = GameObject.FindWithTag("attackAnimator").GetComponent<Animator>();
+        //flashAnim = GameObject.FindWithTag("flashAnimator").GetComponent<Animator>();
     }
 
     private void ChooseAttack()
@@ -145,10 +146,11 @@ public class boss3Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Attack"+finishedMainAttack);
+        //Debug.Log("Attack"+finishedMainAttack);
         if (finishedMainAttack)
         {
             // CHooses main attack depending on player position
+            Debug.Log("NOW");
             ChooseAttack();           
         }
 
@@ -215,6 +217,7 @@ public class boss3Behaviour : MonoBehaviour
 
     // Attack that triggers regularly, most common, main damage
 
+    #region Flower Attack
     public Animator attackFlower;
     public GameObject[] flowers;
 
@@ -247,14 +250,23 @@ public class boss3Behaviour : MonoBehaviour
         // Deals high damage
         yield return null;
     }
-
+    #endregion
     // Deals the most damage
     // Forces player to hide behind walls (if not in trigger collider > take damage)
     // Rare attack except is done whenever at 50% life
+
+    public Animator flashAnim;
+    
+
     IEnumerator LightFlash()
     {
+        finishedMainAttack = false;
+        attackAnim.SetTrigger(animatorStrings.flashStart);
         Debug.Log("lightFlash");
-        yield return null;
+
+        AnimatorStateInfo stateInfo = attackAnim.GetCurrentAnimatorStateInfo(0);
+        float animationLength = stateInfo.length;
+        yield return new WaitForSeconds(animationLength);
     }
 
     IEnumerator LightBeam()
@@ -266,7 +278,7 @@ public class boss3Behaviour : MonoBehaviour
         
         yield return null;
     }
-
+    // MAYbe?
     IEnumerator ImmuneBackOff()
     {
         Debug.Log("ImmuneBackoff");

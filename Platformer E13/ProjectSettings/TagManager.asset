@@ -12,6 +12,7 @@ TagManager:
   - attackAnimator
   - Flower
   - Boss
+  - flashAnimator
   layers:
   - Default
   - TransparentFX

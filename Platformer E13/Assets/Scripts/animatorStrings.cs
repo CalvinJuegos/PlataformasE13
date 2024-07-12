@@ -19,4 +19,6 @@ internal class animatorStrings
     // BOSS 1 STRINGS
     internal static string backOff = "backOff";
     internal static string flowerStart = "flowerStart";
+    internal static string flashStart = "flashStart";
+    internal static string flashBomb = "flashBomb";
 }
