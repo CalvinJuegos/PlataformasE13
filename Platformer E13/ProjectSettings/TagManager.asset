@@ -13,6 +13,7 @@ TagManager:
   - Flower
   - Boss
   - flashAnimator
+  - Beam
   layers:
   - Default
   - TransparentFX

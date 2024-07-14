@@ -40,21 +40,12 @@ public class flowerBehaviour : MonoBehaviour
                 projScript.InitializeDirection(direction);
                 projScript.projSpeed = projectileSpeed;
                 Debug.Log("Projectile direction initialized: " + direction);
-
-                StartCoroutine(endAttack());
             }
             else
             {
                 Debug.LogError("No projectileControl component found on the projectile prefab.");
             }
         }
-    }
-
-    IEnumerator endAttack()
-    {
-        Boss3Behaviour = Boss3Behaviour.GetComponent<boss3Behaviour>();
-        Boss3Behaviour.SetFinishedMainAttack(true);
-        yield return new WaitForSeconds(projectileLifespan);
     }
 
 }

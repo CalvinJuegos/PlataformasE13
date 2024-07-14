@@ -78,6 +78,13 @@ public class playerHealth : MonoBehaviour
         }
     }
 
+    public void handleDeath()
+    {
+        // Show you die screen in ANIMATOR
+
+
+    }
+
     // Update is called once per frame
     void Update()
     {

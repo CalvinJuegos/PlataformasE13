@@ -166,6 +166,8 @@ GameObject:
   - component: {fileID: 29810504}
   - component: {fileID: 29810503}
   - component: {fileID: 29810505}
+  - component: {fileID: 29810507}
+  - component: {fileID: 29810506}
   m_Layer: 6
   m_Name: flash
   m_TagString: attackAnimator
@@ -182,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 29810501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.6, y: 5.8, z: 0}
+  m_LocalPosition: {x: 2.94, y: 5.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,11 +276,101 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss3Behaviour: {fileID: 617376973}
-  flashObj: {fileID: 901190678}
-  flashDamage: 0
-  playerCovered: 0
-  flashDuration: 5
   flashAnim: {fileID: 0}
+  flashObj: {fileID: 901190678}
+  flashDamage: 5
+  playerCovered: 0
+  flashDuration: 3.2
+--- !u!61 &29810506
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29810501}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.7840824, y: -6.275767}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 30, y: 16.875}
+    newSize: {x: 30, y: 16.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.44265, y: 7.0100813}
+  m_EdgeRadius: 0
+--- !u!61 &29810507
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29810501}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -33.710617, y: -7.7306314}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 30, y: 16.875}
+    newSize: {x: 30, y: 16.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.7345467, y: 3.7347174}
+  m_EdgeRadius: 0
 --- !u!1001 &136082916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1316,8 +1408,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 600131332}
-  - component: {fileID: 600131334}
-  - component: {fileID: 600131333}
   m_Layer: 6
   m_Name: lightFlash
   m_TagString: Untagged
@@ -1342,96 +1432,6 @@ Transform:
   - {fileID: 29810502}
   m_Father: {fileID: 617376969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &600131333
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600131331}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.1380491, y: -0.4335425}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 30, y: 16.875}
-    newSize: {x: 30, y: 16.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.6605854, y: 7.0695987}
-  m_EdgeRadius: 0
---- !u!61 &600131334
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600131331}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -30.875143, y: -2.1948104}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 30, y: 16.875}
-    newSize: {x: 30, y: 16.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.0993614, y: 3.7638369}
-  m_EdgeRadius: 0
 --- !u!1001 &603887642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1618,11 +1618,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1365668588}
   - {fileID: 483091507}
   - {fileID: 732877495}
   - {fileID: 606315479}
   - {fileID: 600131332}
-  - {fileID: 1365668588}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &617376970
@@ -1715,6 +1715,7 @@ MonoBehaviour:
   playerTransform: {fileID: 1819389458}
   projectilePrefab: {fileID: 1008183500}
   takenHits: 0
+  timeToNextAttack: 3
   backOffArea: {fileID: 1278085970}
   attackAnim: {fileID: 1365668586}
   attackFlower: {fileID: 8269989379502560575}
@@ -1724,7 +1725,18 @@ MonoBehaviour:
   - {fileID: 1185544460}
   - {fileID: 929650379}
   - {fileID: 2094874004}
-  flashAnim: {fileID: 0}
+  flowerLifespan: 3.2
+  flashAnim: {fileID: 29810504}
+  flashLifespan: 3.2
+  beamLenght: 1.2
+  setIterations: 2
+  setDelay: 0.5
+  beamSet1: {fileID: 1353346231}
+  beamSet2: {fileID: 352195636}
+  beamPrefab: {fileID: 2015963319}
+  spawnInterval: 0.5
+  iterations: 3
+  beamDelay: 0.2
   spawnPosition: {x: 0, y: 0}
   fireRate: 0.5
   nextFireTime: 5
@@ -6456,6 +6468,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acee3f92bafbb6343abec83cbbc29f7f, type: 3}
+--- !u!1 &2015963319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3378791314094827784, guid: f4551f5c38e48404e9f1c45cb6f66969,
+    type: 3}
+  m_PrefabInstance: {fileID: 8719785137146902678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2034176499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6771,6 +6789,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.17
       objectReference: {fileID: 0}
+    - target: {fileID: 4348707832887350858, guid: 045fe0b9445987743beb3ca642e965cf,
+        type: 3}
+      propertyPath: _health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348707832887350858, guid: 045fe0b9445987743beb3ca642e965cf,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 7007440040724951504, guid: 045fe0b9445987743beb3ca642e965cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6904,6 +6932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beam
+      objectReference: {fileID: 0}
+    - target: {fileID: 6429350287226762579, guid: f4551f5c38e48404e9f1c45cb6f66969,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

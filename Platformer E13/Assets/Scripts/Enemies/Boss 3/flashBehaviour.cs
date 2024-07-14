@@ -9,13 +9,12 @@ public class flashBehaviour : MonoBehaviour
     private GameObject player;
     private playerHealth playerHP;
     public boss3Behaviour Boss3Behaviour;
+    public Animator flashAnim;
 
     public GameObject flashObj;
     public float flashDamage = 5;
     public bool playerCovered = false;
     public float flashDuration = 5f;
-
-    public Animator flashAnim;
 
     public void flash()
     {
@@ -29,7 +28,7 @@ public class flashBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player is safe");
+            //Debug.Log("Player is safe");
             playerCovered = true;
         }
     }
@@ -38,7 +37,7 @@ public class flashBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player is no longer safe");
+            //Debug.Log("Player is no longer safe");
             playerCovered = false;
         }
     }
@@ -55,6 +54,7 @@ public class flashBehaviour : MonoBehaviour
 
                 if (playerHP != null)
                 {
+                    Debug.Log(flashDamage);
                     playerHP.Hit(flashDamage);
                 }
 
@@ -70,6 +70,6 @@ public class flashBehaviour : MonoBehaviour
 
         Boss3Behaviour = Boss3Behaviour.GetComponent<boss3Behaviour>();
         Boss3Behaviour.SetFinishedMainAttack(true);
-        print("SeETTTTTTTTTTT");
+        print("SEET");
     }
 }
