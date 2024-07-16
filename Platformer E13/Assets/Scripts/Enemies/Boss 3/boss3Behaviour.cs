@@ -54,7 +54,7 @@ public class boss3Behaviour : MonoBehaviour
         
         //flashAnim = GameObject.FindWithTag("flashAnimator").GetComponent<Animator>();
     }
-    /*
+    
     private void ChooseAttack()
     {
         if (Damagable == null)
@@ -150,13 +150,13 @@ public class boss3Behaviour : MonoBehaviour
             }
         }
     }
-    */
-
+  
+    /*
     public void ChooseAttack()
     {
         StartCoroutine(LightBeam());
     }
-
+    */
 
     public float timeToNextAttack = 5f;
 
@@ -395,7 +395,7 @@ public class boss3Behaviour : MonoBehaviour
 
     // Set active lighting beams, if 1, one set of items,
     // If 2, the other set
-    #region Light Beam Follow
+    #region Light Beam Zone
 
 
     public GameObject beamPrefab;
