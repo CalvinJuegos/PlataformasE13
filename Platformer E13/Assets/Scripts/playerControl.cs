@@ -80,10 +80,13 @@ public class playerControl : MonoBehaviour
         {
             _isDashing = animator.GetBool(animatorStrings.dash);
             return _isDashing;
+        } private set {
+            _isDashing = value;
+            animator.SetBool(animatorStrings.isDashing, _isDashing);
         }
     }
 
-    public bool _isFacingRight = true;
+    private bool _isFacingRight = true;
     public bool isFacingRight { get{ return _isFacingRight; } private set{ 
         if (_isFacingRight != value)
             {
@@ -354,6 +357,8 @@ public class playerControl : MonoBehaviour
     public float dashSpeed = 10f;
     public float dashCooldown = 3f;
     public float dashDuration = 3f;
+    public LayerMask ignoreCollisionLayers;
+
     public void OnDash(InputAction.CallbackContext context)
     {   
         // A�adir IFrames y check health
@@ -365,13 +370,38 @@ public class playerControl : MonoBehaviour
     }
     private IEnumerator HandleDash()
     {
+        IsDashing = true;
         animator.SetTrigger(animatorStrings.dash);
-        rb.velocity = new Vector2(moveInput.x * dashSpeed, 0f);
-        while (!IsDashing)
+
+        // Disable collision with specified layers
+        // NO FUNCIONA CON EL BOSS
+        int playerLayer = gameObject.layer;
+        for (int i = 0; i < 32; i++)
         {
-            yield return null;
+            if ((ignoreCollisionLayers.value & (1 << i)) != 0)
+            {
+                Debug.Log("Ignoring");
+                Physics2D.IgnoreLayerCollision(playerLayer, i, true);
+            }
         }
 
+        // Set the velocity for the dash
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+
+        // Wait for the dash duration
+        yield return new WaitForSeconds(dashDuration);
+
+        // Re-enable collision with specified layers
+        for (int i = 0; i < 32; i++)
+        {
+            if ((ignoreCollisionLayers.value & (1 << i)) != 0)
+            {
+                Physics2D.IgnoreLayerCollision(playerLayer, i, false);
+            }
+        }
+        IsDashing = false;
+
+        // Start the dash cooldown
         StartCoroutine(DashingCooldown());
     }
 

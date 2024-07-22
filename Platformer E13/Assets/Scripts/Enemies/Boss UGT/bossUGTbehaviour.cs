@@ -43,6 +43,15 @@ public class bossUGTbehaviour : MonoBehaviour
     }
 
     [SerializeField]
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(animatorStrings.canMove);
+        }
+    }
+
+    [SerializeField]
     private bool _onGround;
     public bool onGround
     {
@@ -170,7 +179,7 @@ public class bossUGTbehaviour : MonoBehaviour
         Debug.Log("Entered range");
         if (collision.CompareTag("Player"))
         {
-            animator.SetBool("agroRange", true);
+            animator.SetBool(animatorStrings.agroRange, true);
             ChangeState(new ugtAgro(this, player, animator));
         }
     }
@@ -179,13 +188,33 @@ public class bossUGTbehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            animator.SetBool("agroRange", false);
+            animator.SetBool(animatorStrings.agroRange, false);
             // Cycle through ranged attacks, starting with summon
             ChangeState(new ugtSummon(this, player, animator));
             //startingRanged = true;
         }
     }
 
+    public float followUpProbability = 0.65f;
+
+    public void handleFollowUp()
+    {
+        // Generate a random number between 0 and 1
+        float randomValue = Random.Range(0f, 1f);
+        // Check if the random value is less than the follow-up probability
+        if (randomValue < followUpProbability)
+        {
+            // Trigger the follow-up attack
+            Debug.Log("Triggering follow-up attack");
+            ChangeState(new ugtFollowUp(this, player, animator));
+        }
+        else
+        {
+            Debug.Log("No follow-up attack");
+            ChangeState(new ugtAgro(this, player, animator));
+            animator.SetTrigger(animatorStrings.agroTrigger);
+        }
+    }
     #endregion
 
     #region Direction & Movements
@@ -193,7 +222,6 @@ public class bossUGTbehaviour : MonoBehaviour
     public void FacePlayer()
     {
         Vector2 directionToPlayer = player.transform.position - transform.position;
-        //Debug.Log($"Direction to player: {directionToPlayer.x}, Boss isFacingPlayer: {_isFacingPlayer}");
 
         if (directionToPlayer.x > 0 && !_isFacingRight)
         {
@@ -222,8 +250,6 @@ public class bossUGTbehaviour : MonoBehaviour
         onWall = colliderTouch.Cast(Vector2.left, castFilter, wallHits, wallDistance) > 0 ||
                 colliderTouch.Cast(Vector2.right, castFilter, wallHits, wallDistance) > 0;
     }
-
-    // Set Direction
 
     // Handle gravity ¿?
 

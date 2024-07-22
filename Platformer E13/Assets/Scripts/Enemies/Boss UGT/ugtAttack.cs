@@ -21,19 +21,6 @@ public class ugtAttack : ugtState
         animator.SetTrigger(animatorStrings.meleeHit);
         // Attack logic here
 
-
-        // Follow up not working!!!
-        /*
-        // Condition for transition here, may repeat attack and do attack followUp
-        float distanceToPlayer = Vector3.Distance(boss.transform.position, player.transform.position);
-        bool inRangeForMelee = distanceToPlayer < distanceToAttack;
-
-        if (inRangeForMelee)
-        {
-            // Trigger follow-up attack
-            animator.SetTrigger(animatorStrings.followUp);
-        }
-        */
     }
 
     public override void Exit()

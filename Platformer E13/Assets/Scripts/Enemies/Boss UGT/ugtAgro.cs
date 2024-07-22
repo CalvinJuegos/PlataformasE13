@@ -13,6 +13,7 @@ public class ugtAgro : ugtState
     {
         Debug.Log("Entering Agro State");
         // Attack setup code
+        
     }
 
     public override void Execute()
@@ -28,7 +29,10 @@ public class ugtAgro : ugtState
             direction.y = 0; // Ignore vertical movement
 
             // Move towards the player in horizontal direction only
-            boss.transform.position += direction * ugtMoveSpeed * Time.deltaTime;
+            if (boss.CanMove)
+            {
+                boss.transform.position += direction * ugtMoveSpeed * Time.deltaTime;
+            }         
         }
 
         // Example transition to AttackState
@@ -36,6 +40,9 @@ public class ugtAgro : ugtState
         {
             //boss.InRangeForMelee = true;
             boss.ChangeState(new ugtAttack(boss, player, animator));
+        } else
+        {
+            boss.ChangeState(new ugtAgro(boss, player, animator));
         }
     }
 

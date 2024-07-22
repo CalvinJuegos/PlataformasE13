@@ -25,6 +25,7 @@ internal class animatorStrings
     // BOSS UGT STRINGS
     //internal static string 
     internal static string agroRange = "agroRange";
+    internal static string agroTrigger = "agroTrigger";
     internal static string meleeHit = "meleeHit";
     internal static string meleeRange = "meleeRange";
     internal static string followUp = "followUp";

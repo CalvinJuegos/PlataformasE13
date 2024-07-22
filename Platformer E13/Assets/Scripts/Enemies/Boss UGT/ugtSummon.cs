@@ -19,7 +19,9 @@ public class ugtSummon : ugtState
         // Attack behavior code
 
         // Example transition back to IdleState
-        
+        // Possibly if (RNG) closeUp attack
+        boss.ChangeState(new ugtAgro(boss, player, animator));
+        animator.SetTrigger(animatorStrings.agroTrigger);
     }
 
     public override void Exit()
