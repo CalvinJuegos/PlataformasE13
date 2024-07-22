@@ -49,7 +49,6 @@ public class boss3Behaviour : MonoBehaviour
         PlayerControl = GameObject.FindWithTag("Player").GetComponent<playerControl>();       
         Damagable = GetComponent<damagable>();
         DetectionPushRange = GameObject.FindWithTag("Area").GetComponent<detectionPushRange>();
-        
 
         
         //flashAnim = GameObject.FindWithTag("flashAnimator").GetComponent<Animator>();

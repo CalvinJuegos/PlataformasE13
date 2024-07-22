@@ -264,7 +264,6 @@ public class playerControl : MonoBehaviour
         onGround = colliderTouch.Cast(Vector2.down, castFilter, groundHits, groundDistance) > 0;
         onWall = colliderTouch.Cast(Vector2.left, castFilter, wallHits, wallDistance) > 0 ||
                 colliderTouch.Cast(Vector2.right, castFilter, wallHits, wallDistance) > 0;
-
     }
 
     public float slideSpeed;

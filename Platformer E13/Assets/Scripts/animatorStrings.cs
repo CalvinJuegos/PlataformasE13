@@ -21,4 +21,12 @@ internal class animatorStrings
     internal static string flowerStart = "flowerStart";
     internal static string flashStart = "flashStart";
     internal static string flashBomb = "flashBomb";
+
+    // BOSS UGT STRINGS
+    //internal static string 
+    internal static string agroRange = "agroRange";
+    internal static string meleeHit = "meleeHit";
+    internal static string meleeRange = "meleeRange";
+    internal static string followUp = "followUp";
+    internal static string summon = "summon";
 }

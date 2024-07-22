@@ -25,11 +25,11 @@ TagManager:
   - Ground
   - Prop
   - Enemy
+  - Boss
   - Player
   - Obstacle
+  - Platforms
   - Effect
-  - 
-  - 
   - 
   - 
   - 
