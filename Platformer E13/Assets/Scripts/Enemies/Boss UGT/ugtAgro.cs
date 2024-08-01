@@ -11,7 +11,7 @@ public class ugtAgro : ugtState
 
     public override void Enter()
     {
-        Debug.Log("Entering Agro State");
+        //Debug.Log("Entering Agro State");
         // Attack setup code
         
     }
@@ -48,7 +48,7 @@ public class ugtAgro : ugtState
 
     public override void Exit()
     {
-        Debug.Log("Exiting Agro State");
+        //Debug.Log("Exiting Agro State");
         // Cleanup code for attack state
     }
 }

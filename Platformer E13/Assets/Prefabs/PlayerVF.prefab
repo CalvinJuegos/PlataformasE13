@@ -181,8 +181,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 219236635335353646}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: attackRange
       value: 1.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: attackDamage
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
@@ -196,7 +206,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
         type: 3}
+      propertyPath: attackPosieDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
       propertyPath: enemyLayers.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038433590564401751, guid: 58db49ef1f91ae446bcc48841778fa28,
+        type: 3}
+      propertyPath: ignoreCollisionLayers.m_Bits
       value: 17920
       objectReference: {fileID: 0}
     - target: {fileID: 7724253135964571159, guid: 58db49ef1f91ae446bcc48841778fa28,

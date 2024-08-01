@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerHealth : MonoBehaviour
+public class bossUGTHealth : MonoBehaviour
 {
-    Animator animator;
+    private Animator animator;
 
     [SerializeField]
-    private float _maxHealth = 100;
+    private float _maxHealth = 1000;
     public float MaxHealth
     {
         get
@@ -21,7 +21,7 @@ public class playerHealth : MonoBehaviour
     }
 
     [SerializeField]
-    private float _health = 100;
+    private float _health = 1000;
     public float Health
     {
         get
@@ -63,41 +63,11 @@ public class playerHealth : MonoBehaviour
     private bool isInvincible = false;
     private float timeSinceHit = 0;
     private float invencibilityTime = 0.25f;
-    private void Awake()
+
+    // Start is called before the first frame update
+    void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = this.GetComponent<Animator>();
     }
-
-    public void Hit(float damage)
-    {
-        if(IsAlive && !isInvincible)
-        {
-            Debug.Log("Hit for:" + damage);
-            Health -= damage;
-            isInvincible = true;
-        }
-    }
-
-    public void handleDeath()
-    {
-        // Show you die screen in ANIMATOR
-
-        // Load the first scene in HUB and Lower max Health 
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isInvincible)
-        {
-            if (timeSinceHit > invencibilityTime)
-            {
-                // Quitar invencibilidad
-                isInvincible = false;
-                timeSinceHit = 0;
-            }
-            timeSinceHit += Time.deltaTime;
-        }
-    }
+    
 }

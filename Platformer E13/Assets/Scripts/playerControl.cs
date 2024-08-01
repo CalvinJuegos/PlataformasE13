@@ -357,6 +357,7 @@ public class playerControl : MonoBehaviour
     public float dashSpeed = 10f;
     public float dashCooldown = 3f;
     public float dashDuration = 3f;
+    //public LayerMask[] ignoreCollisionLayers;
     public LayerMask ignoreCollisionLayers;
 
     public void OnDash(InputAction.CallbackContext context)
@@ -376,14 +377,19 @@ public class playerControl : MonoBehaviour
         // Disable collision with specified layers
         // NO FUNCIONA CON EL BOSS
         int playerLayer = gameObject.layer;
-        for (int i = 0; i < 32; i++)
+        Debug.Log("Dashing!!!");
+
+        /*
+        foreach (LayerMask mask in ignoreCollisionLayers)
         {
-            if ((ignoreCollisionLayers.value & (1 << i)) != 0)
-            {
-                Debug.Log("Ignoring");
-                Physics2D.IgnoreLayerCollision(playerLayer, i, true);
-            }
+            int layerIndex = (int)Mathf.Log(mask.value, 2);
+            Debug.Log("Ignoring layer: " + layerIndex);
+            Physics2D.IgnoreLayerCollision(playerLayer, layerIndex, true);
         }
+        */
+        Debug.Log("Ignoring layer: " + ignoreCollisionLayers);
+        int layerIndex = (int)Mathf.Log(ignoreCollisionLayers.value, 2);
+        Physics2D.IgnoreLayerCollision(playerLayer, layerIndex, true);
 
         // Set the velocity for the dash
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
@@ -391,14 +397,15 @@ public class playerControl : MonoBehaviour
         // Wait for the dash duration
         yield return new WaitForSeconds(dashDuration);
 
-        // Re-enable collision with specified layers
-        for (int i = 0; i < 32; i++)
+        /*
+        foreach (LayerMask mask in ignoreCollisionLayers)
         {
-            if ((ignoreCollisionLayers.value & (1 << i)) != 0)
-            {
-                Physics2D.IgnoreLayerCollision(playerLayer, i, false);
-            }
+            int layerIndex = (int)Mathf.Log(mask.value, 2);
+            Physics2D.IgnoreLayerCollision(playerLayer, layerIndex, false);
         }
+        IsDashing = false;
+        */
+        Physics2D.IgnoreLayerCollision(playerLayer, layerIndex, false);
         IsDashing = false;
 
         // Start the dash cooldown
@@ -418,6 +425,8 @@ public class playerControl : MonoBehaviour
 
     public Transform attackPoint;
     public float attackRange = 0.5f;
+    public float attackDamage;
+    public float attackPosieDamage;
     public LayerMask enemyLayers;
 
     public void OnAttack(InputAction.CallbackContext attack)
@@ -427,10 +436,20 @@ public class playerControl : MonoBehaviour
             animator.SetTrigger(animatorStrings.attack);
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            Debug.Log("These enemies are hit:" + hitEnemies);
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                Debug.Log("Hit enemy");
+
+                // Get the Damagable component from the enemy
+                damagable Damagable = enemy.GetComponent<damagable>();
+
+                // If the component exists, call the OnHit method
+                if (Damagable != null)
+                {
+                    Debug.Log("Hit enemy");
+                    Damagable.OnHit(attackDamage,attackPosieDamage);
+                }
             }
         }
         

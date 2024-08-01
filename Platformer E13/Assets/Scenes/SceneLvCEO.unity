@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &259409690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7772400380690066581, guid: 045fe0b9445987743beb3ca642e965cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8297832474310097073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &347131474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,7 +2198,7 @@ Transform:
   m_GameObject: {fileID: 1150739408}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.008480879, y: -2.0186052, z: 0}
+  m_LocalPosition: {x: -0.008496514, y: -2.0186052, z: 0}
   m_LocalScale: {x: 1.8170404, y: 1.7596599, z: 1.8170404}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2414,12 +2420,13 @@ GameObject:
   - component: {fileID: 1708503632}
   - component: {fileID: 1708503631}
   - component: {fileID: 1708503635}
+  - component: {fileID: 1708503637}
   - component: {fileID: 1708503634}
   - component: {fileID: 1708503633}
   - component: {fileID: 1708503636}
   m_Layer: 10
   m_Name: UGT
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2577,7 +2584,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   groundDistance: 0.05
   wallDistance: 0.05
-  player: {fileID: 0}
+  player: {fileID: 259409690}
   projectilePrefab: {fileID: 0}
   _onGround: 0
   _onWall: 0
@@ -2613,6 +2620,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1708503637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708503629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4841e7fa8208a544687d03a1817de2d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisePerFrame: 0.05
+  _vitalPoints: 3
+  _maxHealth: 1000
+  _maxPoise: 100
+  _health: 1000
+  _poise: 100
+  _isAlive: 1
+  _isStunned: 0
+  isInvincible: 0
+  stunDuration: 0
+  percentRecovered: 0.15
 --- !u!1 &1770351106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,7 +3301,7 @@ Transform:
   m_GameObject: {fileID: 1799837737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.550859, y: -2.43007, z: -10.022868}
+  m_LocalPosition: {x: -8.550824, y: -2.43007, z: -10.022868}
   m_LocalScale: {x: 2.2568705, y: 2.680034, z: 2.2568705}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3459,7 +3489,17 @@ PrefabInstance:
     - target: {fileID: 9223300167767750607, guid: 045fe0b9445987743beb3ca642e965cf,
         type: 3}
       propertyPath: enemyLayers.m_Bits
-      value: 512
+      value: 1536
+      objectReference: {fileID: 0}
+    - target: {fileID: 9223300167767750607, guid: 045fe0b9445987743beb3ca642e965cf,
+        type: 3}
+      propertyPath: ignoreCollisionLayers.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 9223300167767750607, guid: 045fe0b9445987743beb3ca642e965cf,
+        type: 3}
+      propertyPath: ignoreCollisionLayers.Array.size
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

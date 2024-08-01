@@ -30,4 +30,5 @@ internal class animatorStrings
     internal static string meleeRange = "meleeRange";
     internal static string followUp = "followUp";
     internal static string summon = "summon";
+    internal static string canAttack = "canAttack";
 }

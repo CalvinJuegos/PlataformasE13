@@ -7,6 +7,8 @@ public class damagable : MonoBehaviour
     Animator animator;
     // MISSING POISE RECOVERY OVER TIME and DEATH
 
+    public float poisePerFrame;
+
     [SerializeField]
     private int _vitalPoints;
     public float VitalPoints
@@ -69,8 +71,9 @@ public class damagable : MonoBehaviour
             _health = value;
 
             // Health < 0 = Stun
-            if (_health < 0)
+            if (_health <= 0)
             {
+                Debug.Log("under 0 health");
                 handleStun();
             }
         }
@@ -89,8 +92,9 @@ public class damagable : MonoBehaviour
             _poise = value;
 
             // Poise < 0 = Stun
-            if (_poise < 0)
+            if (_poise <= 0)
             {
+                Debug.Log("under 0 poise");
                 handleStun();
             }
         }
@@ -113,7 +117,7 @@ public class damagable : MonoBehaviour
     }
 
     [SerializeField]
-    private bool _isStunned = true;
+    private bool _isStunned = false;
     public bool IsStunned
     {
         get
@@ -127,6 +131,7 @@ public class damagable : MonoBehaviour
             // Set animator
             //animator.SetBool(animatorStrings.isAlive, value);
             Debug.Log("IsStunned set" + value);
+            //CanMove, Stop StateMAchine, canAttack
         }
     }
 
@@ -137,19 +142,26 @@ public class damagable : MonoBehaviour
     private bool hitWhileStun;
     public float stunDuration;
     public float percentRecovered = 0.15f;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    public void onHit(float damage,float poiseDamage)
+    public void OnHit(float damage,float poiseDamage)
     {
+        Debug.Log("Hit " + IsStunned);
         if(IsStunned && IsAlive && !isInvincible)
         {
             hitWhileStun = true;
-           
-        }else if (IsAlive && !isInvincible)
+            Debug.Log("Hit While Stun");
+
+        }
+        else if (IsAlive && !isInvincible)
         {
+            Debug.Log("Hit for: "+damage);
+            Debug.Log("Hit for poise: " + poiseDamage);
+            
             // Normal attack, deals health damage and poise damage
             Poise -= poiseDamage;
             Health -= damage;
@@ -172,6 +184,7 @@ public class damagable : MonoBehaviour
 
     public IEnumerator stunned(float duration)
     {
+        Debug.Log("Stunned coroutine");
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -179,6 +192,8 @@ public class damagable : MonoBehaviour
             // Check the cancel condition
             if (hitWhileStun)
             {
+                // Not working
+
                 Debug.Log("Exiting Stun!");
                 // -1 Vital Point, no longer stunned
                 VitalPoints -= 1;
@@ -196,12 +211,19 @@ public class damagable : MonoBehaviour
         // if not acted while stunned recover percentage of current health bar
         _health = MaxHealth*percentRecovered;
         Debug.Log("Health reset");
+        IsStunned = false;
         yield return null;
+    }
+
+    private void recoverPoise(float poisePerFrame)
+    {
+        Poise += poisePerFrame;
     }
 
     // Update is called once per frame
     void Update()
     {
+        recoverPoise(poisePerFrame);
         if (isInvincible)
         {
             if (timeSinceHit > invencibilityTime)
