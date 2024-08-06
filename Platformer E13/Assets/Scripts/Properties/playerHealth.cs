@@ -6,6 +6,8 @@ public class playerHealth : MonoBehaviour
 {
     Animator animator;
 
+    public HealthDisplay healthBar;
+
     [SerializeField]
     private float _maxHealth = 100;
     public float MaxHealth
@@ -17,6 +19,7 @@ public class playerHealth : MonoBehaviour
         set
         {
             _maxHealth = value;
+            //healthBar.SetMaxHealth(value);
         }
     }
 
@@ -60,12 +63,16 @@ public class playerHealth : MonoBehaviour
     }
 
     [SerializeField]
-    private bool isInvincible = false;
+    public bool isInvincible = false;
     private float timeSinceHit = 0;
     private float invencibilityTime = 0.25f;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        healthBar = FindObjectOfType<HealthDisplay>();
+        healthBar.SetMaxHealth(MaxHealth);
+
     }
 
     public void Hit(float damage)
@@ -75,6 +82,7 @@ public class playerHealth : MonoBehaviour
             Debug.Log("Hit for:" + damage);
             Health -= damage;
             isInvincible = true;
+            healthBar.SetHealth(Health);
         }
     }
 

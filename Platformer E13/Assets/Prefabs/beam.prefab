@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5597912070414425}
   - component: {fileID: 5306518110695550542}
-  - component: {fileID: 6429350287226762579}
+  - component: {fileID: 774669566803256605}
   - component: {fileID: 5417064872427724281}
+  - component: {fileID: 6429350287226762579}
+  - component: {fileID: 7746144197861976334}
   m_Layer: 0
   m_Name: beam
   m_TagString: Beam
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bf79c8717cf9cfb448d5547c26650424, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9667b71fae13b2147a75504725c5cfcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,6 +88,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &774669566803256605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3378791314094827784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255dd185a94c0a441b6e7349ac98eaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7746144197861976334}
+  collider: {fileID: 6429350287226762579}
+--- !u!114 &5417064872427724281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3378791314094827784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3063330660d49a4fa9994b10d34c776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 40
 --- !u!61 &6429350287226762579
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93,7 +122,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3378791314094827784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -131,16 +160,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0837803, y: 16.875}
   m_EdgeRadius: 0
---- !u!114 &5417064872427724281
-MonoBehaviour:
+--- !u!95 &7746144197861976334
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3378791314094827784}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3063330660d49a4fa9994b10d34c776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageDealt: 40
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ade20ab6f6876754ea90c26f48a4594a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

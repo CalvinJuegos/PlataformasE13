@@ -8,10 +8,12 @@ public class playerControl : MonoBehaviour
 {
     #region Control
     //[Header("CONTROL")]
-    
+
+    private playerHealth player;
     Rigidbody2D rb;
     Animator animator;
     public CapsuleCollider2D colliderTouch;
+
     RaycastHit2D[] groundHits = new RaycastHit2D[5];
     RaycastHit2D[] wallHits = new RaycastHit2D[5];
 
@@ -145,6 +147,7 @@ public class playerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         colliderTouch = GetComponent<CapsuleCollider2D>();
+        player = GetComponent<playerHealth>();
     }
 
     // Update is called once per frame
@@ -297,6 +300,11 @@ public class playerControl : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
 
+    private bool isWallJumping;
+    private float wallJumpDirection;
+    float wallJumpTime = 0.5f;
+    public Vector2 wallJumpPower = new Vector2(5f, 10f);
+
     private void handleGravity()
     {
         // Apply additional gravity when falling
@@ -325,8 +333,14 @@ public class playerControl : MonoBehaviour
 
     private void handleJump()
     {
-    // Handle jump buffering and coyote time
-    if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && CanMove && IsAlive)
+        // Handle wall jump
+        if (onWall && !onGround && CanMove && IsAlive)
+        {
+            handleWallJump();
+        }
+
+        // Handle jump buffering and coyote time
+        else if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && CanMove && IsAlive)
         {
             Debug.Log("Jumping Started");
             rb.velocity = new Vector2(rb.velocity.x, JumpPower);
@@ -334,11 +348,36 @@ public class playerControl : MonoBehaviour
             IsJumping = true;
             jumpInputReleased = false;
         }
+
+    }
+
+    private void handleWallJump()
+    {
+        if (onWall && !onGround && jumpBufferCounter > 0)
+        {
+            isWallJumping = true;
+
+            // Determine wall jump direction and update facing direction
+            wallJumpDirection = isFacingRight ? -1 : 1;
+            SetDirection(new Vector2(wallJumpDirection, 0)); // Update facing direction
+
+            rb.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
+            jumpBufferCounter = 0;
+            jumpInputReleased = false;
+
+            // Disable wall jumping after a certain time to prevent multiple jumps
+            Invoke("ResetWallJump", wallJumpTime);
+        }
+    }
+
+    private void ResetWallJump()
+    {
+        isWallJumping = false;
     }
 
     public void OnJump(InputAction.CallbackContext jump)
     {
-            if (jump.started)
+        if (jump.started)
         {
             jumpBufferCounter = JumpBuffer;
         }
@@ -379,6 +418,9 @@ public class playerControl : MonoBehaviour
         int playerLayer = gameObject.layer;
         Debug.Log("Dashing!!!");
 
+        // Immune to damage while dashing
+        player.isInvincible = true;
+
         /*
         foreach (LayerMask mask in ignoreCollisionLayers)
         {
@@ -396,6 +438,12 @@ public class playerControl : MonoBehaviour
 
         // Wait for the dash duration
         yield return new WaitForSeconds(dashDuration);
+
+        // Reset velocity, remove inertia
+        rb.velocity = new Vector2(0f, rb.velocity.y);
+
+        // No longer immune
+        player.isInvincible = true;
 
         /*
         foreach (LayerMask mask in ignoreCollisionLayers)
@@ -434,6 +482,7 @@ public class playerControl : MonoBehaviour
         if (attack.started)
         {
             animator.SetTrigger(animatorStrings.attack);
+            rb.velocity = new Vector2(0f, rb.velocity.y);
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
             Debug.Log("These enemies are hit:" + hitEnemies);

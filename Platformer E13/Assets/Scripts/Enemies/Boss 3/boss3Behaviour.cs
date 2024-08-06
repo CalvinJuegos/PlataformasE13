@@ -93,7 +93,7 @@ public class boss3Behaviour : MonoBehaviour
                     }
                     else if (highChanceRandom == 2)
                     {
-                        StartCoroutine(LightBeam());
+                        //StartCoroutine(LightBeam());
                     }
                 }
                 else // 50% chance
@@ -126,7 +126,7 @@ public class boss3Behaviour : MonoBehaviour
                     }
                     else if (highChanceRandom == 1)
                     {
-                        StartCoroutine(LightBeam());
+                        //StartCoroutine(LightBeam());
                     }
                 }
                 else // 50% chance
@@ -339,8 +339,8 @@ public class boss3Behaviour : MonoBehaviour
     IEnumerator handleBeam(GameObject set)
     {
         Debug.Log("Entered");
-        beamSet1.SetActive(true);
-        beamSet2.SetActive(true);
+        set.SetActive(true);
+        //beamSet2.SetActive(true);
         /*
         foreach (GameObject beam in set)
         {
@@ -364,8 +364,8 @@ public class boss3Behaviour : MonoBehaviour
         }
         */
         yield return new WaitForSeconds(beamLenght);
-        beamSet1.SetActive(false);
-        beamSet2.SetActive(false);
+        set.SetActive(false);
+        //beamSet2.SetActive(false);
         /*
         foreach (GameObject beam in set)
         {
@@ -395,10 +395,8 @@ public class boss3Behaviour : MonoBehaviour
     // Set active lighting beams, if 1, one set of items,
     // If 2, the other set
     #region Light Beam Zone
-
-
     public GameObject beamPrefab;
-    public float spawnInterval = 0.5f;
+    public float spawnInterval = 2f;
     public int iterations = 3;
     public float beamDelay = 0.2f;
 
@@ -415,7 +413,6 @@ public class boss3Behaviour : MonoBehaviour
 
             // Wait for the next spawn
             yield return new WaitForSeconds(spawnInterval);
-            Destroy(beam);
         }
         finishedMainAttack = true;
     }

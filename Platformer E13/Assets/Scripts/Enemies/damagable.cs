@@ -139,7 +139,7 @@ public class damagable : MonoBehaviour
     private bool isInvincible = false;
     private float timeSinceHit = 0;
     private float invencibilityTime = 0.25f;
-    private bool hitWhileStun;
+    private bool hitWhileStun = false;
     public float stunDuration;
     public float percentRecovered = 0.15f;
 
@@ -175,8 +175,8 @@ public class damagable : MonoBehaviour
         {
             // Restrict movement and animation stun
             //here
-            stunned(stunDuration);
             IsStunned = true;
+            StartCoroutine(stunned(stunDuration));
             Debug.Log("Is Stunned?"+IsStunned);
             
         }
@@ -184,7 +184,7 @@ public class damagable : MonoBehaviour
 
     public IEnumerator stunned(float duration)
     {
-        Debug.Log("Stunned coroutine");
+        Debug.Log("Stunned STUN");
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -201,6 +201,8 @@ public class damagable : MonoBehaviour
                 IsStunned = false;
                 // Reset health
                 _health = MaxHealth;
+                hitWhileStun = false;
+                Poise = MaxPoise;
                 yield break; // Exit the coroutine
             }
 
