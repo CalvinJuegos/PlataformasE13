@@ -13,7 +13,8 @@ public class ugtAgro : ugtState
     {
         //Debug.Log("Entering Agro State");
         // Attack setup code
-        
+        // Face the player
+            boss.FacePlayer();
     }
 
     public override void Execute()
@@ -21,9 +22,7 @@ public class ugtAgro : ugtState
         // Follow the player
         if (player != null)
         {
-            // Face the player
-            boss.FacePlayer();
-
+            
             // Calculate horizontal direction
             Vector3 direction = (player.transform.position - boss.transform.position).normalized;
             direction.y = 0; // Ignore vertical movement
@@ -36,7 +35,7 @@ public class ugtAgro : ugtState
         }
 
         // Example transition to AttackState
-        if (Vector3.Distance(boss.transform.position, player.transform.position) < distanceToAttack)
+        if (Vector2.Distance(boss.transform.position, player.transform.position) < distanceToAttack)
         {
             //boss.InRangeForMelee = true;
             boss.ChangeState(new ugtAttack(boss, player, animator));

@@ -10,15 +10,17 @@ public class ugtIdle : ugtState
     {
         Debug.Log("Entering Idle State");
         // Attack setup code
+        // Face the player
+        boss.FacePlayer();
  
     }
 
+
     public override void Execute()
     {
-        // Face the player
-        boss.FacePlayer();
-
+        
     }
+
 
     public override void Exit()
     {

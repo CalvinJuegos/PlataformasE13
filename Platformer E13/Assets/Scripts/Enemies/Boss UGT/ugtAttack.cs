@@ -8,10 +8,13 @@ public class ugtAttack : ugtState
 
     private float distanceToAttack = 5.0f;
 
+    private bossUGTbehaviour stateMachine;
+
     public override void Enter()
     {
         Debug.Log("Entering Attack State");
         // Attack setup code
+        boss.FacePlayer();
         
     }
 
@@ -20,6 +23,7 @@ public class ugtAttack : ugtState
         // Attack code here
         animator.SetTrigger(animatorStrings.meleeHit);
         // Attack logic here
+        // boss.setAttack
 
     }
 

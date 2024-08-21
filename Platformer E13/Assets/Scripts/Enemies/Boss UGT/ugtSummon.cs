@@ -9,19 +9,21 @@ public class ugtSummon : ugtState
     public override void Enter()
     {
         Debug.Log("Entering Summon State");
-        animator.SetTrigger(animatorStrings.summon);
+        
         // Attack setup code
 
     }
 
     public override void Execute()
     {
+        animator.SetTrigger(animatorStrings.summon);
         // Attack behavior code
-
+        Debug.Log("Attaque summon");
         // Example transition back to IdleState
         // Possibly if (RNG) closeUp attack
         boss.ChangeState(new ugtAgro(boss, player, animator));
         animator.SetTrigger(animatorStrings.agroTrigger);
+
     }
 
     public override void Exit()

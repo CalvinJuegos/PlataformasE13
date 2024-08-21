@@ -139,6 +139,8 @@ public class bossRoseBehaviour : MonoBehaviour
 
     private damagable Damagable;
     public bool startingSummon = false;
+    public float meleeRangeThreshold = 5.0f;
+    public float mediumRangeThreshold = 15.0f;
 
     private void Awake()
     {
@@ -158,7 +160,7 @@ public class bossRoseBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //ChangeState(new ugtIdle(this, player, animator)); // Initial state
+        ChangeState(new roseIdle(this, player, animator)); // Initial state
     }
 
     private void Update()
@@ -172,15 +174,101 @@ public class bossRoseBehaviour : MonoBehaviour
         currentState = newState;
         currentState.Enter();
     }
+
+    #region Choice
+
+    public void ChooseAttack(int playerDistance)
+    {
+        int randomNumber = Random.Range(0, 100);
+        if (playerDistance == 0)
+        {
+            // Melee range = Attack, Follow Up, --Thrust
+            if (randomNumber <= 35)
+            {
+                // Thrust
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 35 && randomNumber <= 70)
+            {
+                // Follow Up
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 70)
+            {
+                // Thrust
+                ChangeState(new roseTransform(this, player, animator));
+            }
+        
+        } else if (playerDistance == 1)
+        {
+            // Medium range = Thrust, Dodge, --Transform
+            if (randomNumber <= 35)
+            {
+                // Thrust
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 35 && randomNumber <= 70)
+            {
+                // Dodge
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 70)
+            {
+                // Transform
+                ChangeState(new roseIdle(this, player, animator));
+            }
+
+        } else if (playerDistance == 2)
+        {
+            // Far range = Thrust, Dodge, --Transform
+            
+            if (randomNumber <= 35)
+            {
+                // Thrust
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 35 && randomNumber <= 70)
+            {
+                // Dodge
+                ChangeState(new roseIdle(this, player, animator));
+            }
+            else if (randomNumber > 70)
+            {
+                // Thrust
+                ChangeState(new roseIdle(this, player, animator));
+            }
+        }
+    }
+
+    #endregion
+
     #region Triggers
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public int playerDistance()
     {
-        Debug.Log("Entered range");
-        if (collision.CompareTag("Player"))
+        // Calculate the distance between the boss and the player
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+
+        // Determine the range based on the distance
+        if (distance < meleeRangeThreshold)
         {
-            animator.SetBool(animatorStrings.agroRange, true);
-            //ChangeState(new ugtAgro(this, player, animator));
+            return 0; // Melee range = Attack, Follow Up, --Thrust
+        }
+        else if (distance < mediumRangeThreshold)
+        {
+            return 1; // Medium range = Thrust, Dodge, --Transform
+        }
+        else
+        {
+            return 2; // Far range = Thrust, Dodge, --Transform
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (currentState is ICollisionHandler collisionHandler)
+        {
+            collisionHandler.HandleCollision(collision);
         }
     }
 
@@ -188,7 +276,7 @@ public class bossRoseBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            animator.SetBool(animatorStrings.agroRange, false);
+            //animator.SetBool(animatorStrings.agroRange, false);
             // Cycle through ranged attacks, starting with summon
             //ChangeState(new ugtSummon(this, player, animator));
             //startingRanged = true;
@@ -206,12 +294,13 @@ public class bossRoseBehaviour : MonoBehaviour
         {
             // Trigger the follow-up attack
             Debug.Log("Triggering follow-up attack");
-            //ChangeState(new ugtFollowUp(this, player, animator));
+            ChangeState(new roseFollowUp(this, player, animator));
         }
         else
         {
+            // Maybe Dodge, maybe burst
             Debug.Log("No follow-up attack");
-            //ChangeState(new ugtAgro(this, player, animator));
+            //ChangeState(new ugtDodge(this, player, animator));
             animator.SetTrigger(animatorStrings.agroTrigger);
         }
     }
@@ -237,6 +326,18 @@ public class bossRoseBehaviour : MonoBehaviour
         }
     }
 
+    public float thrustSpeed = 10f;
+
+    public void Thrust()
+    {
+        Rigidbody2D bossrb = this.GetComponent<Rigidbody2D>();
+        // Calculate the direction towards the player
+        Vector2 directionToPlayer = (player.transform.position - bossrb.transform.position).normalized;
+
+        // Apply force to move the boss towards the player
+        bossrb.AddForce(directionToPlayer * thrustSpeed, ForceMode2D.Impulse);
+    }
+
     #endregion
 
     #region Collisions & Jumps
@@ -251,7 +352,7 @@ public class bossRoseBehaviour : MonoBehaviour
                 colliderTouch.Cast(Vector2.right, castFilter, wallHits, wallDistance) > 0;
     }
 
-    // Handle gravity ¿?
+    // Handle gravity ï¿½?
 
     private void handleJump()
     {

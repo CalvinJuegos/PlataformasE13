@@ -6,6 +6,8 @@ public class ugtFollowUp : ugtState
 {
     public ugtFollowUp(bossUGTbehaviour boss, GameObject player, Animator animator) : base(boss, player, animator) { }
 
+    private bossUGTbehaviour stateMachine;
+
     public override void Enter()
     {
         Debug.Log("Entering Follow Up State");
@@ -17,6 +19,8 @@ public class ugtFollowUp : ugtState
     {
         animator.SetTrigger(animatorStrings.followUp);
         // Ataque
+        // Start cooroutine
+        //boss.setFollowUp
 
         boss.ChangeState(new ugtAgro(boss, player, animator));
     }

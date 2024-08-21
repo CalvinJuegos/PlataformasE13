@@ -31,4 +31,11 @@ internal class animatorStrings
     internal static string followUp = "followUp";
     internal static string summon = "summon";
     internal static string canAttack = "canAttack";
+
+    // BOSS ROSE STRINGS
+    internal static string thrustAttack = "thrustAttack";
+    internal static string transformStart = "transformStart";
+
+    // GENERAL CONTROL STRINGS
+    internal static string playerHit = "playerHit";
 }

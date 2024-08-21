@@ -170,8 +170,10 @@ public class bossUGTbehaviour : MonoBehaviour
     {
         currentState?.Exit();
         currentState = newState;
+        //Debug.Log("Entering estate",currentState);
         currentState.Enter();
     }
+
     #region Triggers
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -215,6 +217,19 @@ public class bossUGTbehaviour : MonoBehaviour
             animator.SetTrigger(animatorStrings.agroTrigger);
         }
     }
+    public GameObject spawnPoint;
+    public int projNum;
+    public void spawnProjectiles()
+    {
+        Instantiate(projectilePrefab, spawnPoint.transform.position, Quaternion.identity);
+        /*
+        for (int i = 0; i < projNum; i++)
+        {
+            Instantiate(projectilePrefab, spawnPoint.transform.position, Quaternion.identity);
+        }
+        */
+    }
+
     #endregion
 
     #region Direction & Movements
@@ -243,7 +258,6 @@ public class bossUGTbehaviour : MonoBehaviour
 
     //REVISAR VARIABLES INUTILES
 
-
     private void checkCollisions()
     {
         onGround = colliderTouch.Cast(Vector2.down, castFilter, groundHits, groundDistance) > 0;
@@ -251,7 +265,7 @@ public class bossUGTbehaviour : MonoBehaviour
                 colliderTouch.Cast(Vector2.right, castFilter, wallHits, wallDistance) > 0;
     }
 
-    // Handle gravity ¿?
+    // Handle gravity ï¿½?
 
     private void handleJump()
     {
