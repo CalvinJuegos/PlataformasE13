@@ -14,6 +14,7 @@ public class roseAttack : roseState
     {
         Debug.Log("Entering Attack State");
         // Attack setup code
+        boss.FacePlayer();
 
     }
 
@@ -22,9 +23,15 @@ public class roseAttack : roseState
         // Attack code here
         animator.SetTrigger(animatorStrings.meleeHit);
         // Attack logic here
-        //boss.ChangeState()
-
-
+        int randomNumber = Random.Range(0, 100);
+        if (randomNumber < 50)
+        {
+            boss.ChangeState(new roseFollowUp(boss, player, animator));
+        }
+        else
+        {
+            boss.ChooseAttack(boss.playerDistance());
+        }
     }
 
     public override void Exit()

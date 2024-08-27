@@ -38,4 +38,7 @@ internal class animatorStrings
 
     // GENERAL CONTROL STRINGS
     internal static string playerHit = "playerHit";
+    internal static string dodge = "dodge";
+    internal static string boom ="boom";
+    internal static string drop ="drop";
 }

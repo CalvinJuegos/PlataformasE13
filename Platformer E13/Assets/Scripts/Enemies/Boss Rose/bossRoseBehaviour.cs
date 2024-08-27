@@ -21,6 +21,12 @@ public class bossRoseBehaviour : MonoBehaviour
     public GameObject projectilePrefab;
 
     private bool _finishedMainAttack = true;
+
+    public bool animationFinished = false;
+
+    public bool hasTransformed = false;
+    public bool preparedToThrust= false;
+    public bool thrustCooldown = false;
     public bool finishedMainAttack
     {
         get
@@ -180,23 +186,25 @@ public class bossRoseBehaviour : MonoBehaviour
     public void ChooseAttack(int playerDistance)
     {
         int randomNumber = Random.Range(0, 100);
+        Debug.Log("Choosing attack");
+        Debug.Log(randomNumber);
         if (playerDistance == 0)
         {
             // Melee range = Attack, Follow Up, --Thrust
-            if (randomNumber <= 35)
+            if (randomNumber <= 65)
+            {
+                // Attack
+                ChangeState(new roseAttack(this, player, animator));
+            }
+            else if (randomNumber > 65 && randomNumber <= 90)
+            {
+                // Dodge
+                ChangeState(new roseDodge(this, player, animator));
+            }
+            else if (randomNumber > 65)
             {
                 // Thrust
-                ChangeState(new roseIdle(this, player, animator));
-            }
-            else if (randomNumber > 35 && randomNumber <= 70)
-            {
-                // Follow Up
-                ChangeState(new roseIdle(this, player, animator));
-            }
-            else if (randomNumber > 70)
-            {
-                // Thrust
-                ChangeState(new roseTransform(this, player, animator));
+                ChangeState(new roseThrust(this, player, animator));
             }
         
         } else if (playerDistance == 1)
@@ -205,17 +213,24 @@ public class bossRoseBehaviour : MonoBehaviour
             if (randomNumber <= 35)
             {
                 // Thrust
-                ChangeState(new roseIdle(this, player, animator));
+                ChangeState(new roseThrust(this, player, animator));
             }
             else if (randomNumber > 35 && randomNumber <= 70)
             {
                 // Dodge
-                ChangeState(new roseIdle(this, player, animator));
+                ChangeState(new roseDodge(this, player, animator));
             }
             else if (randomNumber > 70)
             {
                 // Transform
-                ChangeState(new roseIdle(this, player, animator));
+                if (!hasTransformed)
+                {
+                    ChangeState(new roseTransform(this, player, animator));
+                }
+                else
+                {
+                    ChangeState(new roseThrust(this, player, animator));
+                }
             }
 
         } else if (playerDistance == 2)
@@ -225,17 +240,24 @@ public class bossRoseBehaviour : MonoBehaviour
             if (randomNumber <= 35)
             {
                 // Thrust
-                ChangeState(new roseIdle(this, player, animator));
+                ChangeState(new roseThrust(this, player, animator));
             }
             else if (randomNumber > 35 && randomNumber <= 70)
             {
                 // Dodge
-                ChangeState(new roseIdle(this, player, animator));
+                ChangeState(new roseDodge(this, player, animator));
             }
             else if (randomNumber > 70)
             {
-                // Thrust
-                ChangeState(new roseIdle(this, player, animator));
+                if (!hasTransformed)
+                {
+                    // Transform
+                    ChangeState(new roseTransform(this, player, animator));
+                }
+                else
+                {
+                    ChangeState(new roseThrust(this, player, animator));
+                }
             }
         }
     }
@@ -253,14 +275,17 @@ public class bossRoseBehaviour : MonoBehaviour
         if (distance < meleeRangeThreshold)
         {
             return 0; // Melee range = Attack, Follow Up, --Thrust
+            Debug.Log("Melee range");
         }
         else if (distance < mediumRangeThreshold)
         {
             return 1; // Medium range = Thrust, Dodge, --Transform
+            Debug.Log("Medium range");
         }
         else
         {
             return 2; // Far range = Thrust, Dodge, --Transform
+            Debug.Log("Far range");
         }
     }
 
@@ -304,6 +329,25 @@ public class bossRoseBehaviour : MonoBehaviour
             animator.SetTrigger(animatorStrings.agroTrigger);
         }
     }
+
+    public void OnAnimationComplete()
+    {
+        Debug.Log("Animation complete");
+        animationFinished = true;
+    }
+
+    public void Thrust()
+    {
+        Debug.Log("Thrusting");
+        preparedToThrust = true;
+    }
+
+    public void EndThrust()
+    {
+        Debug.Log("Thrust ended");
+        thrustCooldown = true;
+    }
+
     #endregion
 
     #region Direction & Movements
@@ -326,17 +370,7 @@ public class bossRoseBehaviour : MonoBehaviour
         }
     }
 
-    public float thrustSpeed = 10f;
-
-    public void Thrust()
-    {
-        Rigidbody2D bossrb = this.GetComponent<Rigidbody2D>();
-        // Calculate the direction towards the player
-        Vector2 directionToPlayer = (player.transform.position - bossrb.transform.position).normalized;
-
-        // Apply force to move the boss towards the player
-        bossrb.AddForce(directionToPlayer * thrustSpeed, ForceMode2D.Impulse);
-    }
+    //public float thrustSpeed = 10f;
 
     #endregion
 

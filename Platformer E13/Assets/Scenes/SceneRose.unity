@@ -2131,7 +2131,7 @@ Transform:
   m_GameObject: {fileID: 1150739408}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.008499893, y: -2.0186052, z: 0}
+  m_LocalPosition: {x: -0.008482991, y: -2.0186052, z: 0}
   m_LocalScale: {x: 1.8170404, y: 1.7596599, z: 1.8170404}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2896,7 +2896,7 @@ Transform:
   m_GameObject: {fileID: 1799837737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.550817, y: -2.43007, z: -10.022868}
+  m_LocalPosition: {x: -8.550855, y: -2.43007, z: -10.022868}
   m_LocalScale: {x: 2.2568705, y: 2.680034, z: 2.2568705}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2943,6 +2943,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1049344194891067618}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1906230914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1906230915}
+  - component: {fileID: 1906230916}
+  m_Layer: 10
+  m_Name: BoomArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1906230915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906230914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.21, y: -4.31, z: 0}
+  m_LocalScale: {x: 11.273154, y: 11.273154, z: 11.273154}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961892714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1906230916
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906230914}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1961892710
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,8 +3085,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17115307, y: -0.7701912}
-  m_Size: {x: 2.1446314, y: 9.709618}
+  m_Offset: {x: 0.44, y: -1.33}
+  m_Size: {x: 1.42, y: 8.67}
   m_Direction: 0
 --- !u!212 &1961892713
 SpriteRenderer:
@@ -3085,7 +3152,8 @@ Transform:
   m_LocalPosition: {x: 9.39, y: -4.3207684, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1906230915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1961892715
@@ -3119,6 +3187,8 @@ MonoBehaviour:
   wallDistance: 0.05
   player: {fileID: 259409690}
   projectilePrefab: {fileID: 0}
+  animationFinished: 0
+  hasTransformed: 0
   _onGround: 0
   _onWall: 0
   _isMoving: 0
@@ -3188,9 +3258,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14739418, y: -7.0138474}
+  m_Offset: {x: -0.14739418, y: -5.6}
   serializedVersion: 2
-  m_Radius: 13.525087
+  m_Radius: 9.15
 --- !u!1 &2124002059
 GameObject:
   m_ObjectHideFlags: 0

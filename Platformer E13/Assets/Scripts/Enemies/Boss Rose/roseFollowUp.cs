@@ -10,23 +10,25 @@ public class roseFollowUp : roseState
 
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        Debug.Log("Entering FollowUp State");
         // Attack setup code
-        boss.FacePlayer();
+        //boss.FacePlayer();
 
     }
 
     public override void Execute()
     {
         // Attack code here
-        animator.SetTrigger(animatorStrings.meleeHit);
+        animator.SetTrigger(animatorStrings.followUp);
         // Set path for attack, thrust, dodge or transform
+        boss.ChooseAttack(boss.playerDistance());
+
 
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        Debug.Log("Exiting FollowUp State");
         // Cleanup code for attack state
     }
 }
