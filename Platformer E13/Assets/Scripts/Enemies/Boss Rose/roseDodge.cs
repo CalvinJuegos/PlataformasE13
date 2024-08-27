@@ -8,6 +8,8 @@ public class roseDodge : roseState
     {
         collider = boss.GetComponent<CapsuleCollider2D>();
     }
+    
+    private CapsuleCollider2D collider;
 
     private bossRoseBehaviour stateMachine;
     public bool dodgeStarted = false;

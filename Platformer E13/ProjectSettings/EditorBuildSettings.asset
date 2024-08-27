@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneHub.unity
     guid: 97a8889428e5a104b9e8c358e7635b95
   - enabled: 1
-    path: Assets/Scenes/SceneLvTree.unity
+    path: Assets/Scenes/SceneFirstRise.unity
     guid: b09796fa9c7dd4e40a8e175536479035
   m_configObjects: {}

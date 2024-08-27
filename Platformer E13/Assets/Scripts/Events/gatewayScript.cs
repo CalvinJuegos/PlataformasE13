@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class gatewayToLevel : MonoBehaviour
+public class gatewayScript : MonoBehaviour
 {
 
     [SerializeField]
@@ -14,10 +14,10 @@ public class gatewayToLevel : MonoBehaviour
         // Check if the colliding object has a player tag or component
         if (other.CompareTag("Player") || other.GetComponent<PlayerController>() != null)
         {
-            GoToLevel();
+            Level();
         }
     }
-    public void GoToLevel()
+    public void Level()
     {
         // Siguiente nivel
         Debug.Log(sceneID);
