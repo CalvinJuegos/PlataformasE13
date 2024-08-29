@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneFirstRise.unity
     guid: b09796fa9c7dd4e40a8e175536479035
+  - enabled: 1
+    path: Assets/Scenes/SceneSecondRise.unity
+    guid: f5a14ac078f669f42a20b43da02694cb
+  - enabled: 1
+    path: Assets/Scenes/SceneLvCEO.unity
+    guid: de785e04c802c954dabb963e2674d4e7
+  - enabled: 1
+    path: Assets/Scenes/SceneLvTree.unity
+    guid: 4ad42d2221487c84dabd984b8441d243
+  - enabled: 1
+    path: Assets/Scenes/SceneRose.unity
+    guid: 6da27cc2d48c13d43aafd9e47db3d7ba
   m_configObjects: {}

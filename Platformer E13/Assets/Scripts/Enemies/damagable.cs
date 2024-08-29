@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class damagable : MonoBehaviour
 {
-    Animator animator;
+    public Animator animator;
     // MISSING POISE RECOVERY OVER TIME and DEATH
+
+    public BossHealthDisplay healthBar;
 
     public float poisePerFrame;
 
@@ -146,6 +148,7 @@ public class damagable : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        healthBar.SetMaxHealth(MaxHealth);
     }
 
     public void OnHit(float damage,float poiseDamage)
@@ -155,6 +158,7 @@ public class damagable : MonoBehaviour
         {
             hitWhileStun = true;
             Debug.Log("Hit While Stun");
+            VitalPoints -= 1;
 
         }
         else if (IsAlive && !isInvincible)
@@ -166,11 +170,13 @@ public class damagable : MonoBehaviour
             Poise -= poiseDamage;
             Health -= damage;
             isInvincible = true;
+            healthBar.SetBossHealth(Health);
         }
     }
 
     public void handleStun()
     {
+        Debug.Log("HANDLE STUN");
         if (VitalPoints > 0)
         {
             // Restrict movement and animation stun
