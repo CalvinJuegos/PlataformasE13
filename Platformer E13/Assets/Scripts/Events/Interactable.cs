@@ -8,11 +8,19 @@ public class Interactable : MonoBehaviour
 {
     public bool isInRange;
     public UnityEvent interactAction;
+    public InputAction interactInputAction;
+
+    public void Awake()
+    {
+        interactInputAction.performed += OnInteract;
+        interactInputAction.Enable();
+    }
 
     public void OnInteract(InputAction.CallbackContext interact)
     {
         Debug.Log("Pressed E    ");
-        if (interact.started && isInRange)
+        Debug.Log($"Pressed E: {interact.phase}");
+        if (interact.performed && isInRange)
         {
             Debug.Log("Action");
             interactAction.Invoke();
@@ -30,5 +38,10 @@ public class Interactable : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isInRange = false;
+    }
+    private void OnDisable()
+    {
+        interactInputAction.performed -= OnInteract;
+        interactInputAction.Disable();
     }
 }

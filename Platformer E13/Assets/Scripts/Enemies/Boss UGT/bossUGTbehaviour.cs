@@ -222,12 +222,6 @@ public class bossUGTbehaviour : MonoBehaviour
     public void spawnProjectiles()
     {
         Instantiate(projectilePrefab, spawnPoint.transform.position, Quaternion.identity);
-        /*
-        for (int i = 0; i < projNum; i++)
-        {
-            Instantiate(projectilePrefab, spawnPoint.transform.position, Quaternion.identity);
-        }
-        */
     }
 
     #endregion

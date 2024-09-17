@@ -5,7 +5,7 @@ using UnityEngine;
 public class damagable : MonoBehaviour
 {
     public Animator animator;
-    // MISSING POISE RECOVERY OVER TIME and DEATH
+    // MISSING DEATH
 
     public BossHealthDisplay healthBar;
 
@@ -198,8 +198,7 @@ public class damagable : MonoBehaviour
             // Check the cancel condition
             if (hitWhileStun)
             {
-                // Not working
-
+               
                 Debug.Log("Exiting Stun!");
                 // -1 Vital Point, no longer stunned
                 VitalPoints -= 1;
