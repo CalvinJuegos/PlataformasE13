@@ -98,9 +98,9 @@ MonoBehaviour:
   slideSpeed: 0.9
   fallMultiplier: 3
   lowJumpMultiplier: 0.5
-  JumpPower: 12
+  JumpPower: 11
   MaxFallSpeed: 40
-  FallAcceleration: 130
+  FallAcceleration: 150
   JumpEndEarlyGravityModifier: 1.9
   CoyoteTime: 0.15
   JumpBuffer: 0.2
